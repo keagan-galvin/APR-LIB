@@ -81,7 +81,7 @@
 
 ## CommonHelpers
 
-A set of common helper methods
+A set of common helper methods.
 
 ### isElement
 

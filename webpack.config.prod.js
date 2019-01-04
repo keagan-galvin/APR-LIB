@@ -4,12 +4,14 @@ const webpack = require('webpack');
 
 const bundles = require('./webpack.bundles');
 
+delete bundles.sample;
+
 module.exports = {
     entry: bundles,
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, 'scripts/'),
-        publicPath: 'scripts/',
+        filename: '[name].min.js',
+        path: path.join(__dirname, 'dist/'),
+        publicPath: 'dist/',
         libraryTarget: 'var',
         // `library` determines the name of the global variable
         library: '[name]'

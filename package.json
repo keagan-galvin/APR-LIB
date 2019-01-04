@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-dev": "webpack --config webpack.config.js --mode development",
-    "build-prod": "webpack --config webpack.config.prod.js --mode production",
+    "build-prod": "webpack --config webpack.config.prod.js --mode production && documentation build src/lib/** -f html -o docs && documentation build src/lib/** -f md -o README.md",
     "start-dev": "webpack-dev-server --watch-poll --mode development",
     "start-prod": "webpack-dev-server --watch-poll --open --mode production"
   },

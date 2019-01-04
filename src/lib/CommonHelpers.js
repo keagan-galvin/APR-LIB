@@ -1,5 +1,5 @@
 /**
- * A set of common helper methods
+ * A set of common helper methods.
  * @namespace CommonHelpers
  */
 

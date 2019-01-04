@@ -8,8 +8,8 @@ module.exports = {
     entry: bundles,
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, 'scripts/'),
-        publicPath: 'scripts/',
+        path: path.join(__dirname, 'build/'),
+        publicPath: 'build/',
         libraryTarget: 'var',
         // `library` determines the name of the global variable
         library: '[name]'
