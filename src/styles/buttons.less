@@ -1,0 +1,157 @@
+button,
+.button {
+    font-family: @font-family;
+    box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    line-height: 36px;
+    padding: 0 unit(@spacing, px);
+    border-radius: 2px;
+    overflow: visible;
+    font-weight: 500;
+    background: none;
+    font-size: 15px;
+    min-width: 88px;
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &.icon {
+        min-width: 33px;
+        border-radius: 50%;
+        min-height: 33px;
+        line-height: 0;
+        text-align: center;
+        padding: 0;
+
+        &.small {
+            font-size: 16px;
+            min-width: 24px;
+            min-height: 24px;
+        }
+    }
+
+    &.raised {
+        background-color: #fff;
+        color: #333;
+        transition: box-shadow 300ms ease-in-out;
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+
+        &:disabled {
+            box-shadow: inset 0 3px 1px -2px rgba(0, 0, 0, .2), inset 0 2px 2px 0 rgba(0, 0, 0, .14), inset 0 1px 5px 0 rgba(0, 0, 0, .12);
+        }
+
+        &:active {
+            box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+        }
+    }
+
+    &.flat {
+        color: #fff;
+        background: @blue;
+    }
+
+    &.flat,
+    &.raised {
+        &.primary {
+            color: #fff;
+            background: @primary-color;
+        }
+
+        &.accent {
+            color: #fff;
+            background: @accent-color;
+        }
+
+        &.warn {
+            color: #fff;
+            background: @red;
+        }
+
+        &:disabled {
+            background: rgba(0, 0, 0, .07) !important;
+            color: @border-color !important;
+            cursor: not-allowed;
+        }
+    }
+
+    &.primary {
+        color: @primary-color;
+
+        & .ripple-effect {
+            background-color: rgba(255, 255, 255, 0.15)
+        }
+    }
+
+    &.accent {
+        color: @accent-color;
+
+        & .ripple-effect {
+            background-color: rgba(255, 255, 255, 0.15)
+        }
+    }
+
+    &.warn {
+        color: @red;
+
+        & .ripple-effect {
+            background-color: rgba(255, 255, 255, 0.15)
+        }
+    }
+
+    &:disabled {
+        color: @border-color;
+        cursor: default;
+        background: none;
+        background-color: #efefef;
+    }
+
+    .button-group & {        
+        min-width: auto !important;
+        border: 1px solid @border-color;
+        border-right: 0 none;
+        border-radius: 0;
+        padding: 0 unit(@spacing * .5, px);
+
+        &:first-child {
+            border-top-left-radius: @border-radius;
+            border-bottom-left-radius: @border-radius;
+        }
+
+        &:last-child {
+            border-right: 1px solid @border-color;
+            border-top-right-radius: @border-radius;
+            border-bottom-right-radius: @border-radius;
+            &.active {
+                padding: 1px unit(@spacing * .5 + 1, px);
+            }
+        }
+
+        &.active {
+            border: 0 none;            
+            padding: 1px unit(@spacing * .5, px) 1px  unit(@spacing * .5 + 1, px);
+            background-color: #f5f5f5;
+            box-shadow: inset 0 3px 1px -2px rgba(0, 0, 0, .2), inset 0 2px 2px 0 rgba(0, 0, 0, .14), inset 0 1px 5px 0 rgba(0, 0, 0, .12);
+            
+            & + button {
+                border-left: 0 none;
+                padding-left: unit(@spacing * .5 + 1, px);
+            }
+        }
+
+    }
+}

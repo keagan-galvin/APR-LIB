@@ -1,0 +1,69 @@
+@media screen and (-ms-high-contrast: active),
+screen and (-ms-high-contrast: none) {
+
+    /* IE10+ specific styles go here */
+    #toaster {
+        .toast {
+            .message {
+                flex-basis: auto !important;
+            }
+        }
+    }
+}
+
+#toaster {
+    position: fixed;
+    bottom: unit(@spacing * .25, px);
+    right: unit(@spacing, px);;
+    min-width: 300px;
+    max-width: 500px;
+    padding: unit(@spacing * .5, px) unit(@spacing, px);
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .toast {
+        flex: none;
+        display: flex;
+        padding: unit(@spacing, px);
+        margin: unit(@spacing * .5, px) 0;
+        border-radius: @border-radius;
+        color: #fff;
+        background-color: #454545;
+        transform: translateX(200%);
+        transition: all 130ms ease-in;
+        box-shadow: @elevation;
+        transition-delay: 500ms;
+
+        &.popped {
+            transform: none;
+            transition: all 330ms ease-out;
+            transition-delay: none;
+        }
+
+        .message {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .actions {
+            align-items: center;
+            display: flex;
+            padding-left: unit(@spacing * .5, px);
+
+            button {
+                color: @accent-color;
+            }
+        }
+
+        &.warn {
+            background-color: @red;
+            button {
+                color: #fff;
+            }
+        }
+    }
+}

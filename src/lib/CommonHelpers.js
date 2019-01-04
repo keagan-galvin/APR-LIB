@@ -7,7 +7,7 @@
  * Validates if the provided object is a DOM Element.
  * @memberof CommonHelpers
  * @param {Object} obj Object to tests.
- * @returns {boolean} 
+ * @returns {boolean}  * 
  */
 export function isElement(obj) {
     return (

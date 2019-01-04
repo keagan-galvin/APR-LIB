@@ -1,0 +1,48 @@
+
+.list-wrapper {
+    &.primary {
+        padding: unit(@spacing * .25,px) 0 unit(@spacing,px)  0;
+
+        .list-item {
+            border: 0 none;
+        }
+
+        .divider {
+            margin: unit(@spacing * .25, px) unit(@spacing * 1.5, px);
+            border-bottom: 2px dashed @border-color;
+        }
+    }
+
+    .list-item {
+        padding: unit(@spacing, px) unit(@spacing * 1.5, px);
+        border-bottom: 1px solid @border-color;
+
+        &:last-child {
+            border-bottom: 0 none;
+        }
+
+        &.ripple {
+            &:hover {
+                background-color: rgba(0,0,0,.06);
+            }
+
+            .label {
+                color: @link-blue;
+            }
+        }
+
+        .label {
+            font-weight: 500;
+        }
+
+        .secondary {
+            color: @light-gray;
+            font-size: .9em;
+        }
+
+        p {
+            margin-bottom: 0;
+            margin-top: unit(@spacing * .25,px);
+        }
+    }
+}
