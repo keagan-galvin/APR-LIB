@@ -211,7 +211,7 @@ Type: [Element][84]
 
 Gets/Sets the Dialog Window's content. Setter expects an HTML string or DOM Element.
 
-Type: HTMLCollection
+Type: HTML
 
 #### progressBar
 
@@ -525,7 +525,7 @@ Type: [function][81]
 
 ### Parameters
 
--   `options` **[Object][79]**  (optional, default `{theme:'accent',type:'indeterminate'}`)
+-   `options` **[Object][79]**  (optional, default `{target:null,theme:'accent',type:'indeterminate'}`)
     -   `options.target` **[Element][84]?** Binds return object to an existing DOM Element.
     -   `options.theme` **[string][85]** Applies a theme class to the ProgressBar. (optional, default `'accent'`)
     -   `options.type` **[string][85]** Applies a type class to the ProgressBar. (optional, default `'indeterminate'`)
