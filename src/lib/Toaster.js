@@ -54,7 +54,6 @@
                  el.insertAdjacentHTML('beforeend', `<div class='actions'></div>`);
                  const actionBar = el.querySelector('.actions');
                  actions.forEach(action => actionBar.insertAdjacentElement('beforeend', toastAction(action)));
-                 console.log(el);
              }
 
              el.addEventListener('transitionend', () => {

@@ -4,7 +4,6 @@ import {
     seekElementInBranch,
     generateDeferredPromise
 } from "./CommonHelpers";
-
 import {
     FieldTags
 } from "./FormHelpers";
@@ -113,13 +112,13 @@ export function Dialog({
         /**
          * @memberof DialogService.DialogObject  
          * @name content
-         * @type {HTMLCollection}
+         * @type {HTML}
          * @description Gets/Sets the Dialog Window's content. Setter expects an HTML string or DOM Element.
          * @instance
          */
         Object.defineProperty(dialog, 'content', {
             get() {
-                return dialog.window.children;
+                return dialog.window.innerHTML;
             },
             set(c) {
                 setContent(c);
@@ -252,7 +251,7 @@ export function Dialog({
 
     function escapeClose(e) {
         if (e.key === 'Escape') {
-            if (FieldTags.some(tagName => tagName.toUpperCase() == e.target.tagName)) close(null);
+            if (!FieldTags.some(tagName => tagName.toUpperCase() == e.target.tagName)) close(null);
         }
     }
 

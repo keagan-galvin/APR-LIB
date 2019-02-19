@@ -17,6 +17,10 @@ export function ProgressBar({
     target,
     theme = 'accent',
     type = 'indeterminate'
+} = {
+    target: null,
+    theme: 'accent',
+    type: 'indeterminate'
 }) {
     let bar = (target) ? target : document.createElement('div');
     let loading = false;

@@ -6,7 +6,7 @@
 /**
  * Validates if the provided object is a DOM Element.
  * @memberof CommonHelpers
- * @param {Object} obj Object to tests.
+ * @param {Object} obj Object to test.
  * @returns {boolean}  * 
  */
 export function isElement(obj) {
@@ -14,6 +14,16 @@ export function isElement(obj) {
         typeof HTMLElement === "object" ? obj instanceof HTMLElement :
         obj && typeof obj === "object" && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === "string"
     );
+}
+
+/**
+ * Validates if the provided object is a Function.
+ * @memberof CommonHelpers
+ * @param {Object} functionToCheck Object to test.
+ * @returns {boolean}  * 
+ */
+export function isFunction(functionToCheck) {
+    return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 }
 
 /**

@@ -61,6 +61,11 @@ export function Form(target, callback) {
         setProgressBar();
         setMessagePanel();
         setErrorPanel();
+
+        form.element.addEventListener('submit', (e) => {
+            e.preventDefault();
+            callback(form.validate(), form.data);
+        });
     }
 
     function defineSimpleProperties() {
@@ -164,7 +169,7 @@ export function Form(target, callback) {
                 if (typeof locked != 'boolean') throw "Invalid value";
                 isLocked = locked;
                 form.fields.forEach(field => field.isLocked = isLocked);
-                Array.from(form.wrapper.querySelectorAll('button')).disabled = isLocked;
+                Array.from(form.wrapper.querySelectorAll('button')).forEach(button => button.disabled = isLocked);
             }
         });
 
@@ -231,7 +236,7 @@ export function Form(target, callback) {
                     .forEach(field => {
                         let errorIndex = formErrors.findIndex(fieldErrs => fieldErrs.fieldName === field.name);
                         if (errorIndex != -1) {
-                            field.error.text = formErrors[errorIndex].errors[0];
+                            field.error.text = formErrors[errorIndex].messages[0];
                             formErrors.splice(errorIndex, 1);
                         } else field.error.text = "";
                     });
@@ -239,28 +244,59 @@ export function Form(target, callback) {
                 let formErrorHTML = '';
 
                 formErrors.forEach(fieldError => {
-                    fieldError.errors.forEach(err => {
+                    fieldError.messages.forEach(err => {
                         formErrorHTML += `<div class="error">${err}</div>`;
                     });
                 });
 
-                console.log(formErrors);
                 form.errorPanel.text = formErrorHTML;
             }
         });
 
-        // /**
-        //  * @memberof FormHelpers.Form 
-        //  * @type {Function}
-        //  * @description re-initializes the helper;
-        //  * @returns {Object} [Field](#formhelpersfield)
-        //  * @instance
-        //  */
-        // form.refresh = initialize;
+        form.setValues = (data) => {
+            const props = [];
+            const fields = form.fields;
+
+            console.log(data);
+
+            for (let prop in data) {
+                props.push(prop);
+                if (fields.some(x => x.name == prop)) {
+                    fields.find(x => x.name == prop).value = data[prop];
+                } 
+            }
+
+            fields.filter(x => props.indexOf(x.name) == -1).forEach(field => {
+                field.value = "";
+            });
+        };
+
+        form.updateValues = (data) => {
+            const props = [];
+            const fields = form.fields;
+
+            for (let prop in data) {
+                props.push(prop);
+                if (fields.some(x => x.name == prop)) fields.find(x => x.name == prop).value = data[prop];
+            }
+        };
     }
 
     function setFormElement() {
         let element;
+
+        /**
+         * @memberof FormHelpers.Form
+         * @name element
+         * @type {element}
+         * @description Form DOM Element
+         * @instance
+         */
+        Object.defineProperty(form, 'element', {
+            get: function () {
+                return element;
+            }
+        });
 
         if (target.nodeName == "FORM") {
             element = target;
@@ -279,23 +315,10 @@ export function Form(target, callback) {
 
         element.insertAdjacentElement('afterbegin', target);
         target = element;
-
-        /**
-         * @memberof FormHelpers.Form
-         * @name element
-         * @type {element}
-         * @description Form DOM Element
-         * @instance
-         */
-        Object.defineProperty(form, 'element', {
-            get: function () {
-                return element;
-            }
-        });
     }
 
     function buildFieldWrappers() {
-        const fields = Array.from(form.element.querySelectorAll(FieldTags.join(", ")));
+        const fields = Array.from(form.element.querySelectorAll(FieldTags.join(":not(.ignore), ") + ":not(.ignore)"));
         fields.forEach(field => {
             if (!GetFieldWrapper(field)) BuildFieldWrapper(field);
         });
@@ -365,11 +388,15 @@ export function Form(target, callback) {
         let panel = target.querySelector('.message.error');
 
         if (!panel) {
+            let head = form.element.querySelector('.card .card-toolbars, .dialog-window .head');
+
             panel = document.createElement('div');
             panel.classList.add('message');
             panel.classList.add('error');
             panel.classList.add('warn');
-            form.progressBar.element.insertAdjacentElement('afterend', panel);
+            
+            if (head) head.insertAdjacentElement('afterend', panel);
+            else form.element.insertAdjacentElement('afterbegin', panel);
         }
 
         if (!panel.classList.contains('warn'))
@@ -537,6 +564,13 @@ export function Field(target) {
             },
             set(value) {
                 SetValue(field.element, value);
+
+                if (field.placeholder.element) {
+                    if (field.value && field.value != "") {
+                        if (!field.placeholder.element.classList.contains('filled')) field.placeholder.element.classList.add('filled');
+                    } else field.placeholder.element.classList.remove('filled');
+                }
+
                 field.validate();
             }
         });
@@ -717,7 +751,7 @@ export function Field(target) {
              */
             Object.defineProperty(field, 'options', {
                 get() {
-                    return (field.element.options) ? field.element.options.map(option => {
+                    return (field.element.options) ? Array.from(field.element.options).map(option => {
                         return {
                             text: option.text,
                             value: option.value
@@ -728,7 +762,7 @@ export function Field(target) {
                     if (!Array.isArray(options)) throw "Options must be an array";
                     field.element.innerHTML = "";
                     options.forEach(option => field.element.appendChild(new Option(option.text, option.value, false, (option.selected) ? true : false)));
-                    field.value = field.element[field.element.selectedIndex].value;
+                    if (options.length > 0) field.value = field.element[options.some(x => x.selected) ? field.element.selectedIndex : 0].value;
                 }
             });
         }
@@ -741,38 +775,67 @@ function BuildFieldWrapper(element) {
     if (!isField(element)) throw "Invalid element";
     if (element.type.toLowerCase() == 'hidden') return Field(element);
 
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('form-input');
-    wrapper.insertAdjacentHTML('afterbegin',
-        `<label>
-            <span class="placeholder"></span>
-        </label>
-        <div class="error-message"></div>
-        <div class="note"></div>
-        <div class=""></div>`);
+    switch (element.type.toLowerCase()) {
+        case 'hidden':
+            break;
+        case 'checkbox':
+            {
+                const wrapper = document.createElement('label');
+                wrapper.classList.add('form-checkbox');
+                wrapper.insertAdjacentHTML('afterbegin',
+                    `<span class="placeholder"></span>
+                    <span class="checkmark"></span>`);
 
-    const label = wrapper.querySelector('label');
+                const placeholder = wrapper.querySelector('.placeholder');
+                let placeholderText = element.getAttribute('placeholder');
+                if (!placeholderText) placeholderText = element.name;
+                placeholder.innerHTML = `${placeholderText}${(element.required && placeholderText.indexOf('*') == -1) ? '*' : ''}`;
+                element.removeAttribute('placeholder');
 
-    const note = wrapper.querySelector('.note');
-    if (element.dataset && element.dataset.note)
-        note.innerHTML = element.dataset.note;
 
-    if (element.dataset && element.dataset.noteAlign)
-        note.classList.add(element.dataset.noteAlign);
+                if (element.parentElement) element.parentElement.replaceChild(wrapper, element);
+                else if (element.parentNode) element.parentNode.replaceChild(wrapper, element);
 
-    const error = wrapper.querySelector('.error-message');
-    error.style.display = 'none';
+                wrapper.insertAdjacentElement('afterbegin', element);
 
-    const placeholder = wrapper.querySelector('.placeholder');
-    let placeholderText = element.getAttribute('placeholder');
-    if (!placeholderText) placeholderText = element.name;
-    placeholder.innerHTML = `${placeholderText}${(element.required) ? '*' : ''}`;
-    element.setAttribute('placeholder', '');
+                break;
+            }
+        default:
+            {
+                const wrapper = document.createElement('div');
+                wrapper.classList.add('form-input');
+                wrapper.insertAdjacentHTML('afterbegin',
+                    `<label>
+                    <span class="placeholder"></span>
+                </label>
+                <div class="error-message"></div>
+                <div class="note"></div>`);
 
-    if (element.parentElement) element.parentElement.replaceChild(wrapper, element);
-    else if (element.parentNode) element.parentNode.replaceChild(wrapper, element);
 
-    label.insertAdjacentElement('afterbegin', element);
+                const note = wrapper.querySelector('.note');
+                if (element.dataset && element.dataset.note)
+                    note.innerHTML = element.dataset.note;
+
+                if (element.dataset && element.dataset.noteAlign)
+                    note.classList.add(element.dataset.noteAlign);
+
+                const error = wrapper.querySelector('.error-message');
+                error.style.display = 'none';
+
+                const placeholder = wrapper.querySelector('.placeholder');
+                let placeholderText = element.getAttribute('placeholder');
+                if (!placeholderText) placeholderText = element.name;
+                placeholder.innerHTML = `${placeholderText}${(element.required && placeholderText.indexOf('*') == -1) ? '*' : ''}`;
+                element.setAttribute('placeholder', '');
+
+                const label = wrapper.querySelector('label');
+
+                if (element.parentElement) element.parentElement.replaceChild(wrapper, element);
+                else if (element.parentNode) element.parentNode.replaceChild(wrapper, element);
+
+                label.insertAdjacentElement('afterbegin', element);
+            }
+    }
 
     return Field(element);
 }
@@ -790,10 +853,10 @@ function ValidateField(field) {
         const fields = Array.from(groupWrapper.querySelectorAll(FieldTags.join(','))).map(x => {
             return Field(x);
         });
-        fields.forEach(field => {
-            const error = getError(field.element);
+        fields.forEach(f => {
+            const error = getError(f.element);
             if (error) errors.push({
-                field: field,
+                field: f,
                 error: error
             });
         });
@@ -923,7 +986,7 @@ function HideField(field, isHidden = true) {
 
 function GetFieldWrapper(target) {
     while (target) {
-        if (target.classList && target.classList.contains('form-input')) break;
+        if (target.classList && (target.classList.contains('form-input') || target.classList.contains('form-checkbox'))) break;
         target = target.parentNode;
     }
     return target;
@@ -944,7 +1007,7 @@ function GetValue(target) {
 
     let value;
     if (target.type == 'checkbox') value = target.checked;
-    else if (target.tagName == 'SELECT') value = target[target.selectedIndex].value;
+    else if (target.tagName == 'SELECT') value = (target[target.selectedIndex]) ? target[target.selectedIndex].value : undefined;
     else value = target.value;
 
     return value;
@@ -954,7 +1017,7 @@ function SetValue(target, value) {
     if (!isField(target)) throw "Invalid target";
 
     if (target.type == 'checkbox') target.checked = value;
-    else if (target.tagName == 'SELECT') target.selectedIndex = target.options.findIndex(option => option.value == value);
+    else if (target.tagName == 'SELECT') target.selectedIndex = Array.from(target.options).findIndex(option => option.value == value);
     else target.value = value;
 }
 

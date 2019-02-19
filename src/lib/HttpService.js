@@ -75,10 +75,11 @@
      function post(url, data, contentType = defaultContentType) {
          return new Promise((resolve, reject) => {
              const req = new XMLHttpRequest();
-             req.open('GET', url);
+             req.open('POST', url);
+             if (contentType) req.setRequestHeader('Content-Type', contentType);
              req.onload = () => handleResult(req, resolve, reject);
              req.onerror = () => reject(Error("Network Error"));
-             req.send();
+             req.send((contentType != defaultContentType) ? data : JSON.stringify(data));
          });
      }
 
@@ -91,12 +92,12 @@
       * @returns {string} Query String Parameter Value or undefined object.
       * @instance
       */
-     function getQueryParam(variable, url = null) {
+     function getQueryParam(paramName, url = null) {
          let query = (url) ? url.split('?')[1] : window.location.search.substring(1);
          let vars = query.split('&');
          for (let i = 0; i < vars.length; i++) {
              let pair = vars[i].split('=');
-             if (decodeURIComponent(pair[0]) == variable) {
+             if (decodeURIComponent(pair[0]) == paramName) {
                  return decodeURIComponent(pair[1]);
              }
          }
@@ -104,32 +105,52 @@
      }
 
      function handleResult(req, resolve, reject) {
-         if (req.status == 200) {
-             try {
-                 const response = JSON.parse(req.response);
-                 subscriptions.forEach(callback => callback({
-                     type: 'Success',
-                     data: response
-                 }));
-                 resolve(JSON.parse(req.response));
-             } catch (error) {
-                 subscriptions.forEach(callback => callback({
-                     type: 'Success',
-                     data: req.response
-                 }));
-                 resolve(req.response);
+
+         let response = null;
+
+         try {
+             response = parseResult(JSON.parse(req.response));
+         } catch (error) {
+             response = parseResult(req.response);
+         }
+
+         var result = {
+             status: req.status,
+             statusText: req.statusText,
+             data: response
+         };
+
+         subscriptions.forEach(callback => callback({
+             type: (req.status == 200) ? 'Success' : 'Error',
+             data: response
+         }));
+
+         if (req.status == 200) resolve(result);
+         else reject(result);
+     }
+
+     function parseResult(result) {
+         result = parseDTs(result);
+         return result;
+     }
+
+     function parseDTs(obj) {
+         if (Array.isArray(obj)) {
+             for (let i = 0; obj.length > i; i++) {
+                 obj[i] = parseDTs(obj[i]);
              }
          } else {
-             subscriptions.forEach(callback => callback({
-                 type: 'Error',
-                 data: req.response
-             }));
-
-             reject({
-                 status: req.status,
-                 statusText: req.statusText,
-                 response: req.response
-             });
+             for (var prop in obj) {
+                 if (typeof obj[prop] == 'string') {
+                     if (obj[prop].indexOf("/Date(") == 0) {
+                         obj[prop] = new Date(parseInt(obj[prop].substr(6)));
+                     }
+                 } else if (Array.isArray(obj[prop] || typeof obj[prop] == 'object')) {
+                     obj[prop] = parseDTs(obj[prop]);
+                 }
+             }
          }
+
+         return obj;
      }
  }
