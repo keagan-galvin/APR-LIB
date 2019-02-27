@@ -3,6 +3,7 @@ a {
   color: @link-blue;
   //text-decoration: underline !important;
   font-weight: 500;
+  cursor: pointer;
 
   &:hover {
     color: darken(@link-blue, 10%);
@@ -20,6 +21,18 @@ a {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.animate {
+  transition: all 300ms ease-in-out;
 }
 
 * {
@@ -41,6 +54,10 @@ a {
   white-space: nowrap;
   overflow:hidden;
   text-overflow: ellipsis;
+  &.forced {
+    text-overflow: unset;
+    overflow: unset;
+  }
 }
 
 .content-padding {

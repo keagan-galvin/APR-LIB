@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-dev": "webpack --config webpack.config.js --mode development",
+    "build-dev": "webpack --config webpack.config.js --mode development && documentation build src/lib/** -f html -o docs && documentation build src/lib/** -f md -o README.md",
     "build-prod": "webpack --config webpack.config.prod.js --mode production && documentation build src/lib/** -f html -o docs && documentation build src/lib/** -f md -o README.md",
-    "start-dev": "webpack-dev-server --watch-poll --mode development",
-    "start-prod": "webpack-dev-server --watch-poll --open --mode production"
+    "compile-sample-css": "less-watch-compiler --config ./samples/less-watch-compiler.config.json"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +18,6 @@
     "babel-loader": "^8.0.2",
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-preset-minify": "^0.5.0",
-    "powerbi-client": "^2.6.5",
-    "powerbi-models": "^1.0.12",
-    "squire-rte": "^1.9.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.9"

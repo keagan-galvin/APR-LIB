@@ -1,0 +1,37 @@
+nav {
+    background-color: @primary-color;
+    color: #fff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    .menu {
+        .label {
+            padding: unit(@spacing, px);
+            padding-bottom: unit(@spacing * .5, px);
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+
+        .nav-item, a {
+            display: block;
+            padding: unit(@spacing * .5, px) unit(@spacing, px);
+        }
+    }
+
+    .nav-item, a {
+        display: block;
+        margin: 2px 0;
+        font-size: 1em;
+        font-weight: 400;
+        padding: unit(@spacing, px);
+        text-decoration: none !important;
+        color: #fff !important;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0,0,0,.15);
+        }
+    }
+}

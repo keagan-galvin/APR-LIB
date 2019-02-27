@@ -19,7 +19,8 @@ screen and (-ms-high-contrast: none) {
     flex-direction: column;
     border-radius: @border-radius;
     margin: unit(@spacing * .5, px);
-    border: 1px solid @border-color;
+    
+    box-shadow: @elevation;
 
     &.fill {
         height: 100%;
@@ -35,14 +36,18 @@ screen and (-ms-high-contrast: none) {
         border-radius: 0;
     }
 
-    .raised & {
-        border: 0 none;
-        box-shadow: @elevation;
-    }
-
     .card-toolbars {
         display: flex;
         min-height: 55px;
+        position: relative;
+
+        .progress {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
     }
 
     .card-title {
@@ -51,11 +56,17 @@ screen and (-ms-high-contrast: none) {
         padding: 0 unit(@spacing * 1.5, px);
         border-bottom: 1px solid @border-color;
         min-height: 55px;
+        align-items: center;
 
         &.primary {
             padding: unit(@spacing *.75, px) 0;
             margin: unit(@spacing *.5, px) unit(@spacing * 1.5, px) 0 unit(@spacing * 1.5, px);
             border-bottom: 4px solid @accent-color;
+
+            & + .progress {
+                left:  unit(@spacing * 1.5, px);
+                right:  unit(@spacing * 1.5, px);
+            }
         }
 
         &.secondary {
@@ -71,6 +82,10 @@ screen and (-ms-high-contrast: none) {
             padding: 0 unit(@spacing, px) 0 0;
             align-items: center;
             display: flex;
+
+            a {
+                font-weight: 400;
+            }
         }
 
         .search {
@@ -168,7 +183,7 @@ screen and (-ms-high-contrast: none) {
                 padding: 0 unit(@spacing *.5, px);
                 margin-right: unit(@spacing *.5, px);
                 border-right: 1px solid @border-color;
-                height: 100%;
+                min-height: unit(@spacing * 2, px);
 
                 &:first-child {
                     border-left: 1px solid @border-color;
@@ -181,6 +196,7 @@ screen and (-ms-high-contrast: none) {
 
                 button {
                     color: @accent-color;
+                    font-weight: bold;
                 }
 
                 select {
@@ -189,6 +205,7 @@ screen and (-ms-high-contrast: none) {
                     width: auto !important;
                     border: 0 none;
                     color: @accent-color;
+                    font-weight: bold;
 
                     &:focus {
                         outline-width: 0;
@@ -269,9 +286,18 @@ screen and (-ms-high-contrast: none) {
             flex-direction: column;
             height: auto;
             max-height: 100%;
+            align-items: flex-start;
+
+            .search {
+                padding-top: unit(@spacing * .5, px);
+            }
+            
+            .label {
+                min-height: 27px;
+            }
 
             .options {
-                padding-top: unit(@spacing, px);
+                min-height: 55px;
 
                 .dt-buttons {
                     margin: 0;

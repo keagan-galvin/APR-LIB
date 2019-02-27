@@ -1,0 +1,8 @@
+{
+    "watchFolder": "./samples/less",
+    "outputFolder": "./samples",
+    "mainFile": "samples.less",
+    "sourceMap": false,
+    "minified": false,
+    "runOnce": false
+}

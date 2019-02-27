@@ -1,16 +1,39 @@
+@primary-border-style: 2px dashed @border-color;
+
 .panel-list {
+
     .panel {
         box-shadow: @elevation;
         background-color: #fff;
         border-bottom: 1px solid rgba(0,0,0,.1);
-    
-        &:first-child {
-            //border-radius: @border-radius @border-radius 0 0 !important;
-        }
         
-        &:last-child {
-            //border-radius: 0 0 @border-radius @border-radius;
-            border-bottom: 0 none;
+
+        &.primary {
+            box-shadow: none;
+            border: 0 none;
+            
+            &:last-child {
+                border-bottom: @primary-border-style;
+            }
+            
+            .panel-head {
+                border-top: @primary-border-style
+            }
+
+            .panel-content .content-padding {   
+                border-top: 4px solid @accent-color;      
+                padding: unit(@spacing * 2,px) 0 0 0;
+                margin: 0 unit(@spacing * 1.5, px);
+            }
+            
+            &.expanded {
+                overflow: auto;
+                margin: 0;
+
+                .panel-content .content-padding {              
+                    max-height: 1000px;
+                }
+            }
         }
 
         .panel-state {
@@ -24,7 +47,7 @@
             transition-delay: 300ms;
 
             &.expanded {  
-                overflow: hidden !important;              
+                overflow: hidden !important;
                 .panel-content { 
                     transition: all 400ms ease-in;
                     transition-delay: 300ms;
@@ -33,16 +56,9 @@
             }              
         }
 
-        & + .expanded {            
-            //border-bottom-left-radius: @border-radius !important;
-            //border-bottom-right-radius: @border-radius !important;
-        }
-
         &.expanded {
             overflow: auto;
             margin: unit(@spacing, px) 0;
-            //border-radius: @border-radius !important;
-            border-bottom: 0 none;
 
             .panel-content {                 
                 max-height: 1000px;

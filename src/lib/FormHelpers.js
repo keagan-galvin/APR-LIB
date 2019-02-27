@@ -11,7 +11,11 @@ import {
  */
 
 // Start Global Listerns
-document.addEventListener('keyup', (e) => {
+document.addEventListener('keyup', HandleFieldEvent);
+document.addEventListener('change', HandleFieldEvent);
+document.addEventListener('blur', HandleFieldEvent);
+
+function HandleFieldEvent(e) {
     let target = e.target;
     if (target.tagName && FieldTags.some(tag => tag.toUpperCase() == target.tagName)) {
         let field = Field(target);
@@ -23,14 +27,14 @@ document.addEventListener('keyup', (e) => {
                 } else field.placeholder.element.classList.remove('filled');
             }
 
-            //Clear focus
-            if (e.key == 'Escape') target.blur();
-
             //Refresh Validation
             field.validate();
         }
+        
+        //Clear focus
+        if (e.key && e.key == 'Escape') target.blur();
     }
-});
+}
 
 /**
  * Generate a FormHelper
@@ -148,7 +152,7 @@ export function Form(target, callback) {
                 return isValid;
             },
             set(bool) {
-                if (typeof bool != 'boolean') throw 'Invalid boolean.'
+                if (typeof bool != 'boolean') throw 'Invalid boolean.';
                 isValid = bool;
             }
         });
@@ -225,7 +229,7 @@ export function Form(target, callback) {
                         return {
                             fieldName: field.name,
                             errors: [field.error.text]
-                        }
+                        };
                     });
             },
             set(formErrors) {
@@ -257,13 +261,11 @@ export function Form(target, callback) {
             const props = [];
             const fields = form.fields;
 
-            console.log(data);
-
             for (let prop in data) {
                 props.push(prop);
                 if (fields.some(x => x.name == prop)) {
                     fields.find(x => x.name == prop).value = data[prop];
-                } 
+                }
             }
 
             fields.filter(x => props.indexOf(x.name) == -1).forEach(field => {
@@ -369,11 +371,11 @@ export function Form(target, callback) {
 
         Object.defineProperty(form.messagePanel, 'text', {
             get() {
-                let el = form.messagePanel.element
+                let el = form.messagePanel.element;
                 return (el) ? el.innerHTML : undefined;
             },
             set(value) {
-                let el = form.messagePanel.element
+                let el = form.messagePanel.element;
                 if (el) el.innerHTML = value;
                 setPanelState();
             }
@@ -394,7 +396,7 @@ export function Form(target, callback) {
             panel.classList.add('message');
             panel.classList.add('error');
             panel.classList.add('warn');
-            
+
             if (head) head.insertAdjacentElement('afterend', panel);
             else form.element.insertAdjacentElement('afterbegin', panel);
         }
@@ -420,11 +422,11 @@ export function Form(target, callback) {
 
         Object.defineProperty(form.errorPanel, 'text', {
             get() {
-                let el = form.errorPanel.element
+                let el = form.errorPanel.element;
                 return (el) ? el.innerHTML : undefined;
             },
             set(value) {
-                let el = form.errorPanel.element
+                let el = form.errorPanel.element;
                 if (el) el.innerHTML = value;
                 setPanelState();
             }
@@ -455,10 +457,6 @@ export function Form(target, callback) {
 
     function getFields() {
         const fields = Array.from(form.element.querySelectorAll(FieldTags.join(", ")));
-        fields.forEach(field => {
-            fields
-        });
-
         return fields.map(x => Field(x));
     }
 
@@ -609,11 +607,11 @@ export function Field(target) {
 
         Object.defineProperty(field.placeholder, 'text', {
             get() {
-                let el = field.placeholder.element
+                let el = field.placeholder.element;
                 return (el) ? el.innerHTML : undefined;
             },
             set(value) {
-                let el = field.placeholder.element
+                let el = field.placeholder.element;
                 if (el) el.innerHTML = value;
             }
         });
@@ -634,7 +632,7 @@ export function Field(target) {
 
         Object.defineProperty(field.error, 'text', {
             get() {
-                let el = field.error.element
+                let el = field.error.element;
                 return (el) ? el.innerHTML : undefined;
             },
             set(text) {
@@ -671,7 +669,7 @@ export function Field(target) {
 
         Object.defineProperty(field.note, 'text', {
             get() {
-                let el = field.note.element
+                let el = field.note.element;
                 return (el) ? el.innerHTML : undefined;
             },
             set(text) {
@@ -692,7 +690,7 @@ export function Field(target) {
                 return isValid;
             },
             set(bool) {
-                if (typeof bool != 'boolean') throw 'Invalid boolean.'
+                if (typeof bool != 'boolean') throw 'Invalid boolean.';
                 isValid = bool;
             }
         });
@@ -709,9 +707,9 @@ export function Field(target) {
                 return isLocked;
             },
             set(locked) {
-                if (typeof locked != 'boolean') throw 'Invalid boolean.'
+                if (typeof locked != 'boolean') throw 'Invalid boolean.';
                 isValid = locked;
-                LockField(field, locked)
+                LockField(field, locked);
             }
         });
 
@@ -755,7 +753,7 @@ export function Field(target) {
                         return {
                             text: option.text,
                             value: option.value
-                        }
+                        };
                     }) : [];
                 },
                 set(options) {
@@ -843,7 +841,7 @@ function BuildFieldWrapper(element) {
 export const validationPatterns = {
     url: /^(?:(?:https?|HTTPS?|ftp|FTP):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-zA-Z\u00a1-\uffff0-9]-*)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]-*)*[a-zA-Z\u00a1-\uffff0-9]+)*)(?::\d{2,5})?(?:[\/?#]\S*)?$/,
     email: /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/
-}
+};
 
 function ValidateField(field) {
     // check if part of field group
@@ -895,18 +893,18 @@ function ValidateField(field) {
                 case 'url':
                     return 'Invalid URL.';
                 default:
-                    return 'Invalid value.'
+                    return 'Invalid value.';
             }
         }
 
         if (target.type.toLowerCase() == 'url' && !validationPatterns.url.test(target.value)) {
             messageOverride = getOverrideMessage('url-error');
-            return messageOverride ? messageOverride : 'Invalid URL.'
+            return messageOverride ? messageOverride : 'Invalid URL.';
         }
 
         if (target.type.toLowerCase() == 'email' && !validationPatterns.email.test(target.value)) {
             messageOverride = getOverrideMessage('email-error');
-            return messageOverride ? messageOverride : 'Invalid Email.'
+            return messageOverride ? messageOverride : 'Invalid Email.';
         }
 
         if (validity.tooShort) {
@@ -917,7 +915,7 @@ function ValidateField(field) {
         if (validity.tooLong) {
             messageOverride = getOverrideMessage('maxLength-error');
             return messageOverride ? messageOverride : `Must be no more than ${target.getAttribute('maxLength')} characters.`;
-        };
+        }
 
         // If number input isn't a number
         if (validity.badInput) {

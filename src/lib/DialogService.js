@@ -63,7 +63,7 @@ export function Dialog({
 
         dialog.window.addEventListener('transitionend', dialogTransitionEndEvent);
 
-        dialog.wrapper.addEventListener('click', dialogClickEvent)
+        dialog.wrapper.addEventListener('click', dialogClickEvent);
 
     }
 
@@ -181,6 +181,14 @@ export function Dialog({
         }
     }
 
+    /**
+     * @memberof DialogService.DialogObject
+     * @name open
+     * @type {function}
+     * @description Opens the dialog.
+     * @returns {Promise}
+     * @instance
+     */
     function open() {
         try {
             // Initialize new deferral;
@@ -210,31 +218,46 @@ export function Dialog({
         }
     }
 
-    function close(data, immediate = true) {
+    /**
+     * @memberof DialogService.DialogObject
+     * @name close
+     * @type {function}
+     * @param {object} data Data to be returned to any active Open/Close promises.
+     * @param {bool} immediate Close the window immediately or wait for the specified timeout period before closing.
+     * @param {bool} timeout Number of milliseconds to wait before closing.
+     * @description Closes the dialog.
+     * @returns {Promise}
+     * @instance
+     */
+    function close(data, immediate = true, timeout = 300) {
         // Clear Current Focus
         let tmp = document.createElement("input");
         document.body.appendChild(tmp);
         tmp.focus();
-        document.body.removeChild(tmp)
+        document.body.removeChild(tmp);
 
         // return promise
         return new Promise((resolve, reject) => {
-            try {
+            try {                
+                document.removeEventListener('keyup', escapeClose);
+                
                 if (immediate) {
-                    dialog.window.classList.add('immediate');
-                    dialog.overlay.classList.add('immediate');
+                    if (!dialog.window.classList.contains('immediate')) dialog.window.classList.add('immediate');
+                    if (!dialog.overlay.classList.contains('immediate')) dialog.overlay.classList.add('immediate');
+                    if (deferral != null) deferral.resolve(data);
+                    resolve(data);
+                }
+
+                if (!immediate) {
+                    if (dialog.window.classList.contains('immediate')) dialog.window.classList.remove('immediate');
+                    if (dialog.overlay.classList.contains('immediate')) dialog.overlay.classList.remove('immediate');                    
+                    if (deferral != null) setTimeout(() => deferral.resolve(data), timeout);
+                    setTimeout(() => resolve(data), timeout);
                 }
 
                 dialog.window.classList.remove('opened');
                 dialog.overlay.classList.remove('opened');
 
-                document.removeEventListener('keyup', escapeClose);
-
-                if (deferral != null) {
-                    deferral.resolve(data);
-                }
-
-                setTimeout(resolve, 300);
             } catch (error) {
                 if (deferral != null) {
                     deferral.reject({
@@ -300,9 +323,7 @@ export function Dialog({
  * @param {(string|element)} options.title Dialog Window Title
  * @param {(string|element)} options.message Dialog Window Message
  * @param {string} options.width Dialog Window Width. Must define unit (px,pt,em)
- * @param {string} options.confirmLabel Rendered label of the "Confirm" button
- * @param {string} options.cancelLabel Rendered label of the "Cancel" button
- * @param {boolean} options.useCancel Display a cancel button
+ * @param {{ label:string, value:string, classes:(string|string[]), styles:(string|string[]) }[]} options.actions Dialog window action settings. An action's value will be returned in Open/Close Promise Resolution if clicked.
  * @param {boolean} options.useOverlayClose Use overlay click-to-close feature.
  * @param {string[]} options.classes Classes to be applied to the wrapper element.
  * @returns {Object} new DialogObject
@@ -311,9 +332,17 @@ export function ConfirmDialog({
     title,
     message,
     width = 'auto',
-    confirmLabel = 'Ok',
-    cancelLabel = 'Cancel',
-    useCancel = true,
+    actions = [
+        {
+            label: 'cancel',
+            value: 'canceled'
+        },
+        {
+            label: 'ok',
+            classes: ['raised'],
+            value: 'Confirmed'
+        }
+    ],
     useOverlayClose = true,
     classes = []
 }) {
@@ -326,9 +355,18 @@ export function ConfirmDialog({
         </div>
         <div class="body">${message}</div>
         <div class="actions">
-            ${useCancel ? `<button close-dialog="canceled">${cancelLabel}</button>` : ''}
-            <button close-dialog="confirmed" class="raised">${confirmLabel}</button>
+            ${actions.map(action => templateAction(action)).join('')}
         </div>`;
+
+    function templateAction(action) {
+        let classes = CommonHelpers.isStringOrStringArray(action.classes);
+        if (action.classes && !classes) throw "Invalid Confirm Dialog Action Class(es).";
+
+        let styles = CommonHelpers.isStringOrStringArray(action.styles);
+        if (action.classes && !classes) throw "Invalid Confirm Dialog Action Styles(es).";
+
+        return `<button ${classes && classes.length > 0 ? `class="${classes.join(' ')}"` : ''} ${styles && styles.length > 0 ? `style="${styles.join(' ')}"` : ''} ${action.value ? `close-dialog="${action.value}"` : 'close-dialog'}>${action.label}</button>`;
+    }
 
     return Dialog({
         content: template,

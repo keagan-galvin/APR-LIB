@@ -113,3 +113,25 @@ export function seekElementInBranch(startingElement, searchMethod, searchIdentif
 
     return (target) ? target : null;
 }
+
+
+/**
+ * Checks if the provided object is a string or string array. Returns string array if validation is passed, else a null is returned.
+ * @memberof CommonHelpers
+ * @type {function}
+ * @param {(String|String[])} test Object to check
+ * @returns {(String[]|null)} String Array or Null if object does not pass validation.
+ */
+export function isStringOrStringArray(test) {
+    let arr = [];
+
+    if (Array.isArray(test)) {
+        test.forEach(obj => {
+            if (typeof obj !== 'string') return null;
+            arr.push(obj);
+        });
+    } else if (typeof test === 'string') arr.push(test);
+    else return null;
+
+    return arr;
+}

@@ -7,9 +7,10 @@
 @input-top: 15px;
 @input-height: 30px;
 @input-border-color: grey;
-@disabled-color: rgba(0, 0, 0, .42);
+@disabled-color: rgba(0, 0, 0, .52);
 
-@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+@media screen and (-ms-high-contrast: active),
+screen and (-ms-high-contrast: none) {
 
     /* IE10+ specific styles go here */
     .form-input {
@@ -23,9 +24,60 @@
     }
 }
 
+input,
+textarea,
+select {
+    background-color: transparent;
+}
+
+.form-panel {    
+
+    .error-counter {
+        display: none;
+    }
+
+    .panel-head {        
+        .panel-label {
+            &::before {                
+                transition: padding-right 50ms ease-in-out;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: "";
+                padding-right: 0;
+            }
+        }
+    }
+
+    &.error {
+
+        &.collapsed {
+            background-color: @warn-background !important;
+        }
+
+        .panel-head {
+            color: @red;
+
+            .panel-label {
+                &::before {
+                    content: "\f06a";
+                    padding-right: 4px;
+                }
+            }
+        }
+
+        .error-counter {
+            display: block;
+        }
+
+        .panel-content .content-padding {
+            border-color: @red !important;
+        }
+    }
+}
+
 .form-group {
     display: flex;
-    align-items:baseline;
+    align-items: baseline;
 
     &.row {
         flex-direction: row;
@@ -36,17 +88,26 @@
         flex-direction: column;
     }
 
-    .spacer {
-        width: unit(@spacing * .5, px);
+    .form-input {
+        margin-right: unit(@spacing * .5, px);
+        flex-basis: 100%;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 
 .form-input {
-    width: 100%;
-    margin-bottom: unit(@spacing * 2, px);
-    position: relative;
+    margin-bottom: unit(@spacing * 3, px);
 
+    &.hidden {
+        display: none;
 
+        &+.spacer {
+            display: none;
+        }
+    }
 
     label {
         position: relative;
@@ -56,6 +117,7 @@
     }
 
     &.unlabeled {
+
         input,
         textarea,
         select {
@@ -121,7 +183,6 @@
     .note {
         font-size: .9em;
         margin-top: unit(@spacing * .25, px);
-        position: absolute;
         left: 0;
         right: 0;
     }
@@ -164,14 +225,14 @@
     input:focus,
     textarea:focus,
     select:focus {
-        & + .placeholder {
+        &+.placeholder {
             top: 0;
             cursor: inherit;
             font-size: @placeholder-font-size-small;
             color: @highlight-color;
         }
 
-        & + .fixed-placeholder {
+        &+.fixed-placeholder {
             cursor: inherit;
             font-size: @placeholder-font-size-small;
             color: @highlight-color;
@@ -182,7 +243,7 @@
 
     &.error {
         .placeholder {
-            color: @red !important;
+            color: @red  !important;
         }
 
         input,
@@ -204,7 +265,7 @@
         background-repeat: repeat-x;
         border-bottom: none;
 
-        & + .placeholder.filled {
+        &+.placeholder.filled {
             color: @disabled-color;
         }
     }
@@ -231,28 +292,28 @@
         width: 0;
 
         &:disabled {
-            ~ .checkmark {
+            ~.checkmark {
                 background: #ededed !important;
                 border-color: #ccc !important;
             }
 
-            ~ .label {
+            ~.placeholder {
                 color: @light-gray;
             }
 
             &:checked {
-                ~ .checkmark {
+                ~.checkmark {
                     border-color: #ededed !important;
 
                     &:after {
-                        border-color: @light-gray !important;
+                        border-color: @light-gray  !important;
                     }
                 }
             }
         }
 
         &:checked {
-            ~ .checkmark {
+            ~.checkmark {
                 background-color: @blue;
                 border: 2px solid @blue;
 
@@ -295,12 +356,12 @@
 
     &:hover {
         input {
-            ~ .checkmark {
+            ~.checkmark {
                 background-color: rgba(0, 0, 0, .1);
             }
 
             &:checked {
-                ~ .checkmark {
+                ~.checkmark {
                     background-color: darken(@blue, 5%);
                     border-color: darken(@blue, 5%);
                 }

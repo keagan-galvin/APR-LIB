@@ -9,12 +9,40 @@
         background-color: @blue;
     }
     
-    &.primary .determinate, &.primary .indeterminate {
-        background-color: @primary-color;
+    &.primary {
+        .determinate, .indeterminate {
+            background-color: @primary-color;
+        }
     }
     
-    &.accent .determinate, &.accent .indeterminate {
-        background-color: @accent-color;
+    &.accent {
+        .determinate, .indeterminate {
+            background-color: @accent-color;
+        }
+    }
+
+    &.warn {
+        background: @warn-background;
+        
+        .determinate, .indeterminate {
+            background-color: @red;
+        }
+    }
+
+    &.success {
+        background: @success-background;
+        
+        .determinate, .indeterminate {
+            background-color: @green;
+        }
+    }
+
+    &.alert {
+        background: @yellow-background;
+        
+        .determinate, .indeterminate {
+            background-color: @yellow-dark;
+        }
     }
 
     & .determinate {
@@ -22,7 +50,7 @@
         background-color: inherit;
         top: 0;
         bottom: 0;
-        transition: width .3s linear;
+        transition: width .4s ease-in-out;
     }
 
     & .indeterminate {
