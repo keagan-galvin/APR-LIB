@@ -734,6 +734,7 @@ export function Field(target) {
          */
         field.setWrapper = () => {
             if (!field.wrapper) BuildFieldWrapper(field.element);
+            field.value = field.value;
         };
     }
 
@@ -1017,6 +1018,8 @@ function SetValue(target, value) {
     if (target.type == 'checkbox') target.checked = value;
     else if (target.tagName == 'SELECT') target.selectedIndex = Array.from(target.options).findIndex(option => option.value == value);
     else target.value = value;
+
+    target.dispatchEvent(new Event('change'));
 }
 
 function isField(target) {

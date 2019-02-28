@@ -35,11 +35,14 @@ nav a:hover {
 main {
   overflow: auto;
   flex-basis: 100%;
-  padding: 8px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
 }
 .pen-card {
-  padding-bottom: 24px;
+  margin-bottom: 32px;
 }
 body {
   display: flex;
+  overflow: hidden;
 }
