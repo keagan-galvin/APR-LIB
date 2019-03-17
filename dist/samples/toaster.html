@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Samples - Buttons</title>
+    <!-- 3rd Party Plugins -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/brands.css" integrity="sha384-QT2Z8ljl3UupqMtQNmPyhSPO/d5qbrzWmFxJqmY7tqoTuT2YrQLEqzvVOP2cT5XW"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i" rel="stylesheet">
+
+    <link href="../../dist/styles.css" type="text/css" rel="stylesheet" />
+
+    <script defer src="../../dist/polyfills.min.js" type="text/javascript"></script>
+    <script defer src="../../dist/lib.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main style="padding: 2rem">
+        <div class="card">
+            <div class="card-toolbar toolbar">
+                <h2 class="label">Dialog Samples</h2>
+                <div class="options">
+                    <div class="group">
+                        <button class="primary" onclick="Toast()">Toast</button>
+                        <button class="flat primary" onclick="Toast('warn')">Toast w/ Jam</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script defer>
+        function Toast(jam) {
+            Toaster.toast({
+                message: 'Toast is served!',
+                classes: [jam]
+            });
+        }
+</script>
+
+</html>

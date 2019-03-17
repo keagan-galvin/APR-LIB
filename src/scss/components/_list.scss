@@ -72,14 +72,14 @@
             }
 
             p, span {
-                & + .toolbar
+                & + .toolbar, 
                 {
                     margin-top: unit(1.5);
                 }
-            }
 
-            p {
-                margin: 0;
+                & + & {
+                    
+                };
             }
 
             .secondary {

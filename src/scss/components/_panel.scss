@@ -7,10 +7,6 @@
         @include boxShadow();
         background-color: #ffffff;
         border-radius: 0;
-
-        .animatable {
-            transition-delay: 200ms !important;
-        }
         
         &:first-child {
             border-top-left-radius: $border-radius;
@@ -65,18 +61,15 @@
 
     .panel-state {
         transition: all 130ms ease-in-out;
-        transition-delay: 150ms;
     }
 
     &.animatable {
         overflow: hidden;
-        transition: all 130ms ease-in-out;
 
         &.expanded {
             overflow: hidden !important;
 
             .panel-content {
-                transition: all 400ms ease-in;
                 overflow: hidden !important;
             }
         }
@@ -89,8 +82,6 @@
             max-height: 1000px;
         }
     }
-
-
 
     .panel-head {
         display: flex;
@@ -109,5 +100,6 @@
     .panel-content {
         max-height: 0;
         overflow: hidden;
+        transition: all 400ms ease-in-out;
     }
 }

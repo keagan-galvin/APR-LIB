@@ -353,14 +353,14 @@ export function ConfirmDialog({
     classes = []
 }) {
     const template = `
-        <div class="card-toolbar">
-            <h3 class="card-title" >${title}</h1> 
+        <div class="card-toolbar toolbar">
+            <h3 class="label" >${title}</h1> 
             <div class="progress accent">
                 <div class="indeterminate"></div>
             </div>
         </div>   
-        <div class="card-content">${message}</div>
-        <div class="card-toolbar actions">
+        <div class="card-content content-padding">${message}</div>
+        <div class="toolbar actions">
             ${actions.map(action => templateAction(action)).join('')}
         </div>`;
 
