@@ -1,0 +1,113 @@
+.panel-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .panel-card {
+        @include boxShadow();
+        background-color: #ffffff;
+        border-radius: 0;
+
+        .animatable {
+            transition-delay: 200ms !important;
+        }
+        
+        &:first-child {
+            border-top-left-radius: $border-radius;
+            border-top-right-radius: $border-radius;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+    
+        & + & {
+            &.expanded {
+                margin-top: unit(1);
+            }
+        }
+    
+        &.expanded {
+            border-top-left-radius: $border-radius;
+            border-top-right-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+
+            & + .panel-card {
+                margin-top: unit(1);
+                border-top-left-radius: $border-radius;
+                border-top-right-radius: $border-radius;
+            }
+        }
+    }
+}
+
+.panel-card {
+    @include boxShadow();
+    background-color: #fff;
+    border-radius: $border-radius;
+
+    & + & {
+        &.expanded {
+            margin-top: unit(1);
+        }
+    }
+
+    &.expanded {
+        & + .panel-card {
+            margin-top: unit(1);
+        }
+    }
+}
+
+.panel {
+
+    .panel-state {
+        transition: all 130ms ease-in-out;
+        transition-delay: 150ms;
+    }
+
+    &.animatable {
+        overflow: hidden;
+        transition: all 130ms ease-in-out;
+
+        &.expanded {
+            overflow: hidden !important;
+
+            .panel-content {
+                transition: all 400ms ease-in;
+                overflow: hidden !important;
+            }
+        }
+    }
+
+    &.expanded {
+        overflow: auto;
+
+        .panel-content {
+            max-height: 1000px;
+        }
+    }
+
+
+
+    .panel-head {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &[toggle-panel] {
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, .05);
+            }
+        }
+    }
+
+    .panel-content {
+        max-height: 0;
+        overflow: hidden;
+    }
+}

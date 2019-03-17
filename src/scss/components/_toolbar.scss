@@ -1,0 +1,68 @@
+.toolbar {
+    position: relative;
+    display: flex;
+    padding: unit(1) unit(1.5);
+    align-items: center;
+
+    .progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex-basis: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .options {
+        display: flex;
+        color: $dark-gray;
+
+        .group {
+            display: flex;
+            align-items: center;
+            padding: 0 unit(.5);
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            & + .group {
+                border-left: 1px solid $border-color;
+            }
+            
+            button {
+                margin-right: unit(.5);
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        label {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        select {
+            padding-left: unit(.25);
+            width: auto !important;
+            border: 0 none;
+            color: $link-blue;
+            font-weight: 500;
+            font-size: 1.6rem;
+            font-family: $font-family;
+
+            &:focus {
+                outline-width: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+@import './common/_vars';
+
+:root {
+    // Default browser font size is 16px
+    // Setting the root font-size to 62.5% will result in a default font-size of 10px.
+    // This allows for easier conversion from 'px' to 'rem' ( 16px/10px = 1.6rem )
+    font-size: 62.5%;
+    
+    &, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-size: 1.6rem; //Set base size to browser default of 16px;
+      position: relative;
+      color: $font-color;
+      font-family: $font-family;
+      background-color: #ddd;
+    }
+  }
+
+@import './components/_button';
+@import './components/_button-group';
+@import './components/_card';
+@import './components/_dialog';
+@import './components/_form';
+@import './components/_list';
+@import './components/_panel';
+@import './components/_progress-bar';
+@import './components/_toaster';
+@import './components/_toolbar';
+@import './components/_tooltip';
+@import './components/_ripple';
+
+@import './common/_flex';
+@import './common/_layout';
+@import './common/_typography';

@@ -1,0 +1,56 @@
+#toaster {
+    position: fixed;
+    bottom: unit(.25);
+    right: 0;
+    min-width: 30rem;
+    max-width: 50rem;
+    padding: unit(.5) unit(1);
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .toast {
+        @include boxShadow();
+        flex: none;
+        display: flex;
+        padding: unit(1);
+        margin: unit(.5) 0;
+        border-radius: $border-radius;
+        color: #fff;
+        background-color: #454545;
+        transform: translateX(200%);
+        transition: all 130ms ease-in;
+        transition-delay: 500ms;
+
+        &.popped {
+            transform: none;
+            transition: all 330ms ease-out;
+            transition-delay: none;
+        }
+
+        .message {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .actions {
+            align-items: center;
+            display: flex;
+            padding-left: unit(.5);
+
+            button {
+                color: $accent-color;
+            }
+        }
+
+        &.warn {
+            background-color: $warn-color;
+            button {
+                color: #fff;
+            }
+        }
+    }
+}

@@ -13,13 +13,15 @@ import {
 // Start Global Listerns
 document.addEventListener('keyup', HandleFieldEvent);
 document.addEventListener('change', HandleFieldEvent);
-document.addEventListener('blur', HandleFieldEvent);
+document.addEventListener('blur', HandleFieldEvent, true);
+document.addEventListener('focus', HandleFieldEvent, true);
 
 function HandleFieldEvent(e) {
     let target = e.target;
     if (target.tagName && FieldTags.some(tag => tag.toUpperCase() == target.tagName)) {
         let field = Field(target);
         if (field.wrapper) {
+
             //Set placeholder state
             if (field.placeholder.element) {
                 if (field.value && field.value != "") {
@@ -28,11 +30,16 @@ function HandleFieldEvent(e) {
             }
 
             //Refresh Validation
-            field.validate();
+            if (field.wrapper.classList.contains("touched") && !(e.key && e.keyCode == 9)) {
+                field.validate();
+            } else {
+                field.wrapper.classList.add("touched");
+            }
         }
         
         //Clear focus
         if (e.key && e.key == 'Escape') target.blur();
+
     }
 }
 
@@ -61,6 +68,7 @@ export function Form(target, callback) {
 
         defineSimpleProperties();
         setFormElement();
+        form.element.setAttribute('novalidate', '');
         buildFieldWrappers();
         setProgressBar();
         setMessagePanel();
@@ -641,12 +649,12 @@ export function Field(target) {
                     let noteEl = field.note.element;
                     if (text && text != "") {
                         errorEl.innerHTML = text;
-                        errorEl.style.display = '';
-                        if (noteEl) noteEl.style.display = 'none';
+                        if (errorEl.classList.contains('hidden')) errorEl.classList.remove('hidden');
+                        if (noteEl && !noteEl.classList.contains('hidden')) noteEl.classList.add('hidden');
                     } else {
-                        errorEl.innerHTML = '';
-                        errorEl.style.display = 'none';
-                        if (noteEl) noteEl.style.display = '';
+                        errorEl.innerHTML = '';                        
+                        if (!errorEl.classList.contains('hidden')) errorEl.classList.add('hidden');
+                        if (noteEl && noteEl.classList.contains('hidden')) noteEl.classList.remove('hidden');
                     }
                 }
 
@@ -760,8 +768,13 @@ export function Field(target) {
                 set(options) {
                     if (!Array.isArray(options)) throw "Options must be an array";
                     field.element.innerHTML = "";
-                    options.forEach(option => field.element.appendChild(new Option(option.text, option.value, false, (option.selected) ? true : false)));
-                    if (options.length > 0) field.value = field.element[options.some(x => x.selected) ? field.element.selectedIndex : 0].value;
+                    options.forEach(option => {
+                        const o = new Option(option.text, option.value, false, (option.selected) ? true : false);
+                        if (option.disabled) o.disabled = true;
+                        field.element.appendChild(o);
+                    });
+
+                    if (options.length > 0)  field.value = field.element[options.some(x => x.selected) ? field.element.selectedIndex : 0].value;
                 }
             });
         }
@@ -819,7 +832,7 @@ function BuildFieldWrapper(element) {
                     note.classList.add(element.dataset.noteAlign);
 
                 const error = wrapper.querySelector('.error-message');
-                error.style.display = 'none';
+                if (!error.classList.contains('hidden')) error.classList.add('hidden');
 
                 const placeholder = wrapper.querySelector('.placeholder');
                 let placeholderText = element.getAttribute('placeholder');

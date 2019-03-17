@@ -24,6 +24,9 @@
 
          if (!toaster.element)
              document.querySelector('body').insertAdjacentHTML('beforeend', '<div id="toaster"></div>');
+
+         
+             toaster.element.setAttribute("role", "status");
      }
 
      /**
@@ -81,6 +84,7 @@
                  const button = document.createElement('button');
                  action.classes.forEach(x => button.classList.add(x));
                  button.innerHTML = action.label;
+                 
                  button.setAttribute('close-toast', (action.value) ? action.value : action.label);
                  return button;
              }

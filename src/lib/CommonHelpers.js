@@ -73,7 +73,7 @@ export function generateDeferredPromise() {
  * @memberof CommonHelpers
  * @type {function}
  * @param {element} startingElement Node branch to search.
- * @param {string} searchMethod Node attribute to be checked. Accepts "hasId", "hasClass", "hasAttribute" * 
+ * @param {string} searchMethod Node attribute to be checked. Accepts "hasId", "hasClass", "hasAttribute", 'hasNodeName" * 
  * @param {string} searchIdentifier Node value to find.
  * @returns {(element|null)} Seeker result
  */
@@ -100,9 +100,17 @@ export function seekElementInBranch(startingElement, searchMethod, searchIdentif
                 break;
             }
         case 'hasAttribute':
-            {                           
+            {
                 while (target) {
                     if (target.hasAttribute && target.hasAttribute(searchIdentifier)) break;
+                    target = target.parentElement;
+                }
+                break;
+            }
+        case 'hasNodeName':
+            {
+                while (target) {
+                    if (target.nodeName && target.nodeName == searchIdentifier.toUpperCase()) break;
                     target = target.parentElement;
                 }
                 break;

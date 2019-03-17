@@ -1,0 +1,135 @@
+@mixin counterStyle($bg, $color) {
+    &:before {
+        background-color: $bg;
+        color: $color;
+        padding: unit(.15);        
+        font-size: unit(.85);
+    }
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &.dashed-divider {
+        li {
+            border-bottom: .2rem dashed $border-color;
+            &:last-child {
+                border-bottom: 0 none;
+            }
+        }
+    }
+
+    &.solid-divider {
+        li {
+            border-bottom: .1rem solid $border-color;
+            &:last-child {
+                border-bottom: 0 none;
+            }
+        }
+    }
+
+    li {
+        margin: none;
+        padding: 0;
+        display: flex;
+        align-content: flex-start;
+
+        a {
+            &.item {
+                &:hover {
+                    background: rgba(0,0,0, 0.05);
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .item, &.item {
+            padding: unit(1) unit(1.5);
+            font-weight: 400;
+            flex-direction: column;
+
+            .toolbar {
+                padding: 0;
+
+                .label {
+                    flex-basis: 100%;
+                }
+            }
+
+            .label {
+                font-weight: 500;
+                padding: 0;
+                margin: 0;
+            }
+
+            .toolbar {
+                & + p, & + span 
+                {
+                    margin-top: unit(.5);
+                }
+            }
+
+            p, span {
+                & + .toolbar
+                {
+                    margin-top: unit(1.5);
+                }
+            }
+
+            p {
+                margin: 0;
+            }
+
+            .secondary {
+                color: $gray;
+            }
+        }
+    }
+}
+
+
+ol.list {
+    li {
+        counter-increment: item;
+
+        &:before {
+            margin-right: 10px;
+            content: counter(item);
+            border-radius: 100%;
+            width: 1.2em;
+            height: 1.2em;
+            text-align: center;
+            display: inline-block;
+            font-weight: 500;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+
+        &.primary {
+            @include counterStyle($primary-color, #fff);
+        }
+
+        &.accent {
+            @include counterStyle($accent-color, #fff);
+        }
+
+        &.warn {
+            @include counterStyle($warn-color, #fff);
+        }
+    }
+
+    &.primary {
+        @include counterStyle($primary-color, #fff);
+    }
+
+    &.accent li {
+        @include counterStyle($accent-color, #fff);
+    }
+
+    &.warn li {
+        @include counterStyle($warn-color, #fff);
+    }
+}

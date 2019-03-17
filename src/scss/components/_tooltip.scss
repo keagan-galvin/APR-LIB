@@ -1,0 +1,125 @@
+
+[tooltip] {
+    cursor: pointer;
+    position: relative;
+    
+    &:before, &:after {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: all .15s cubic-bezier(.5, 1, .25, 1);
+        z-index: 10;
+    }
+    
+    &:before {
+        padding: .5rem;
+        width: 11rem;
+        border-radius: $border-radius;
+        background: rgba(0,0,0,.6);
+        color: #fff;
+        content: attr(tooltip);
+        text-align: center;
+        font-size: unit(.9) !important;
+        font-weight: normal;
+        line-height: 1.2;
+    }
+    
+    &:after {
+        border: .8rem solid transparent;
+        width: 0;
+        content: "";
+        font-size: 0;
+        line-height: 0;
+    }
+    
+    /********** Default Behavior **********/
+    &:hover:before, &:hover:after {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    /********** Tooltip Sizes **********/
+    &.t-xl:before {
+        width: 20rem;
+    }
+    
+    &.t-lg:before {
+        width: 17rem;
+    }
+    
+    &.t-md:before {
+        width: 14rem;
+    }
+    
+    &.t-sm:before {
+        width: 11rem;
+    }
+    
+    &.t-xs:before {
+        width: 8rem;
+    }
+
+    &.t-xxs:before {
+        width: 4rem;
+    }
+    
+    /********** Top Tooltip **********/
+    &.t-top {
+        &:before {
+            bottom: 100%;
+            left: 50%;
+            //margin-bottom: 5px;
+            transform: translateX(-50%);
+        }
+      
+      &:hover:before, &:hover:after {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+      
+      
+    /********** Right Tooltip **********/
+    &.t-right {
+        &:before {
+            top: 50%;
+            left: 100%;
+            //margin-left: 5px;
+            transform: translateY(-50%);
+        }
+      
+      
+      &:hover:before, &:hover:after {
+        transform: translateX(.5rem) translateY(-50%);
+      }
+    }      
+    
+    /********** Bottom Tooltip **********/
+    &.t-bottom {
+        &:before {
+            top: 100%;
+            left: 50%;
+            //margin-top: 5px;
+            transform: translateX(-50%);
+        }
+      
+      &:hover:before, &:hover:after {
+        transform: translateX(-50%) translateY(5px);
+      }
+    
+    }
+    
+    /********** Left Tooltip **********/
+    &.t-left {
+        &:before {
+            top: 50%;
+            right: 100%;
+            //margin-right: 5px;
+            transform: translateY(-50%);
+        }
+      
+      &:hover:before, &:hover:after {
+        transform: translateX(-.5rem) translateY(-50%);
+      }
+    }    
+}

@@ -1,0 +1,117 @@
+.button-group {
+    background-color: #fff;
+    border-radius: $border-radius;
+    font-size: 0;
+    display: inline-flex;
+
+    &.raised {
+        @include boxShadow();
+        margin-bottom: unit(.25);
+
+        .button, button {
+            border-top: 0 none !important;
+            border-bottom: 0 none !important;
+            border-left: 0 none !important;
+
+            &.active {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+        }
+    }
+
+    button,
+    .button {
+        $h-padding: unit(.5);
+        $border: .1rem solid $border-color;
+        $transition: 125ms ease-in-out;
+
+        min-width: 0;
+        border-radius: 0;
+        padding: 0 $h-padding;
+        border-top: $border;        
+        border-right: $border;        
+        border-bottom: $border;  
+        transition: box-shadow $transition, background-color $transition;      
+
+        &::after {
+            border-radius: 0;
+        }
+
+        &:first-child {     
+            border-left: $border;  
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+
+            &::after {
+                border-top-left-radius: $border-radius;
+                border-bottom-left-radius: $border-radius;
+            }
+        }
+
+        &:last-child {
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+
+            &::after {
+                border-top-right-radius: $border-radius;
+                border-bottom-right-radius: $border-radius;
+            }
+        }
+
+
+        &.active {
+            @include boxShadow(true);
+            background-color: #f5f5f5;
+            padding-right:  unit(.5) + 1 !important;
+            border: 0 none !important;
+            padding-top: .1rem;
+            padding-bottom: .1rem;
+
+            &.flat,
+            &.raised {
+                &.primary {
+                    background-color: lighten($primary-color, 10%);
+                }
+
+                &.accent {
+                    background-color: lighten($accent-color, 10%);
+                }
+
+                &.warn {
+                    background-color: lighten($warn-color, 10%);
+                }
+            }
+
+            &+button {
+                border-left: 0 none;
+            }
+        }
+
+        &.flat, &.raised {
+            &, &.warn, &.primary, &.accent {
+                border-top: 0 none;
+                border-bottom: 0 none;
+                border-left: 0 none;
+                
+                &:last-child {
+                    border-right: 0 none !important;
+                    padding-right:  $h-padding !important;
+                }
+            }
+            
+        }
+
+        &.primary {
+            @include ButtonGroupFilledButton($primary-color);
+        }
+
+        &.accent {
+            @include ButtonGroupFilledButton($accent-color);
+        }
+
+        &.warn {
+            @include ButtonGroupFilledButton($warn-color);
+        }
+    }
+}

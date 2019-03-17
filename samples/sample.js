@@ -1,57 +1,123 @@
 var penGroups = [{
-    title: 'Components',
-    pens: [{
-            title: 'Buttons',
-            hash: 'bZdzgO',
-            height: '657px'
-        },
-        {
-            title: 'Card',
-            hash: 'YgXRWd',
-            height: '350px'
-        },
-        {
-            title: 'Progress Bar',
-            hash: 'aMOPYo',
-            height: '475px'
-        }
-    ]
-}];
+        title: 'Components',
+        pens: [{
+                title: 'Buttons',
+                hash: 'bZdzgO'
+            },
+            {
+                title: 'Card',
+                hash: 'YgXRWd',
+                height: '350px'
+            },
+            {
+                title: 'Progress Bar',
+                hash: 'aMOPYo'
+            }
+        ]
+    },
+    {
+        title: 'FormHelpers',
+        pens: [{
+            title: 'Form',
+            hash: 'eXpxQp'
+        }]
+    },
+    {
+        title: 'DialogService',
+        pens: [{
+                title: 'Custom Dialog',
+                hash: 'LaxBgV'
+            },
+            {
+                title: 'Confirmation Dialog',
+                hash: 'LaxBgV'
+            }
+        ]
+    },
+    {
+        title: 'Toaster',
+        pens: [{
+            title: 'Toast',
+            hash: 'moRjNm'
+        }]
+    }
+];
 
-
+var main, nav;
 document.addEventListener("DOMContentLoaded", function () {
-    var main = document.querySelector('main');
-    var nav = document.querySelector('nav');
+    main = document.querySelector('main');
+    nav = document.querySelector('nav');
 
     for (var i = 0; i < penGroups.length; i++) {
-        var menuHTML = '',
-            penCardsHTML = '';
+        var menuHTML = '';
 
         menuHTML = '<div class="menu">';
         menuHTML += '<div class="label">' + penGroups[i].title + '</div>';
 
-        for (var ii = 0; ii < penGroups[i].pens.length; ii++) {
-            menuHTML += '<a href="#' + penGroups[i].pens[ii].hash + '">' + penGroups[i].pens[ii].title + '</a>';
-
-            penCardsHTML += '<div id="' + penGroups[i].pens[ii].hash + '" class="pen-card">';
-
-            penCardsHTML += '<p class="codepen" ' +
-                'data-height="' + ((penGroups[i].pens[ii].height) ? penGroups[i].pens[ii].height : '350px') + '" ' +
-                'data-theme-id="0" ' +
-                'data-default-tab="result" ' +
-                'data-user="keagan-galvin" ' +
-                'data-slug-hash="' + penGroups[i].pens[ii].hash + '" ' +
-                'style="height: 358px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" ' +
-                'data-pen-title="' + penGroups[i].pens[ii].title + '" >' +
-                '<span>See the Pen <a href="https://codepen.io/keagan-galvin/pen/' + penGroups[i].pens[ii].hash + '/">' + penGroups[i].pens[ii].title + '</a> by keagan-galvin (<a href="https://codepen.io/keagan-galvin">@keagan-galvin</a>) on <a href="https://codepen.io">CodePen</a>.</span>' +
-                '</p>';
-
-            penCardsHTML += '</div>';
-        }
+        for (var ii = 0; ii < penGroups[i].pens.length; ii++)
+            menuHTML += '<a href="#" onclick="SetPen(this)" pen-hash="' + penGroups[i].pens[ii].hash + '">' + penGroups[i].pens[ii].title + '</a>';
 
         menuHTML += '</div>';
 
         nav.insertAdjacentHTML('beforeend', menuHTML);
-        main.insertAdjacentHTML('beforeend', penCardsHTML);
     }
+
+    nav.querySelector('a').click();
 });
+
+function SetPen(target) {
+    target = CommonHelpers.seekElementInBranch(target, "hasAttribute", "pen-hash");
+
+    if (target) {
+        console.log('setting pen!');
+
+        var hash = target.getAttribute('pen-hash');
+        var active = nav.querySelector('.active');
+
+        if (active) active.classList.remove('active');
+        if (target.classList) event.target.classList.add('active');
+
+        var iframe = main.querySelector('iframe');
+        iframe.src = "http://codepen.io/keagan-galvin/embed/" + hash + "/?theme-id=36268";
+    }
+
+
+}
+
+var form = FormHelpers.Form(document.querySelector('.card'));
+var select = form.field('State');
+
+
+function getFormData() {
+
+    // simulat long request
+    var minTime = 1000;
+    var now = new Date();
+
+    form.progressBar.isLoading = true;
+
+    HttpService.get('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_titlecase.json').then(
+        response => {
+
+            var span = new Date() - now;
+
+            if (span >= minTime) set();
+            else setTimeout(set, minTime - span);
+
+
+            function set() {
+                var options = [];
+
+                for (var i = 0; i < response.data.length; i++) {
+                    options.push({
+                        text: response.data[i].name,
+                        value: response.data[i].abbreviation
+                    });
+                }
+
+                select.options = options;
+            }
+        },
+        error => console.log(error));
+
+}

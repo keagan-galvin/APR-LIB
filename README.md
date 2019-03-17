@@ -13,78 +13,84 @@
         -   [Parameters][9]
     -   [isStringOrStringArray][10]
         -   [Parameters][11]
--   [CommonListeners][12]
-    -   [Linkable][13]
-    -   [Ripple][14]
-    -   [HoverSpin][15]
--   [DialogService][16]
-    -   [CloseAttribute][17]
-    -   [Dialog][18]
-        -   [Parameters][19]
-    -   [DialogObject][20]
-        -   [wrapper][21]
-        -   [overlay][22]
-        -   [window][23]
-        -   [content][24]
-        -   [progressBar][25]
-        -   [bringForward][26]
-        -   [open][27]
-        -   [close][28]
-            -   [Parameters][29]
-    -   [ConfirmDialog][30]
-        -   [Parameters][31]
--   [FormHelpers][32]
-    -   [Form][33]
-        -   [Parameters][34]
-        -   [wrapper][35]
-        -   [data][36]
-        -   [callback][37]
-        -   [field][38]
-            -   [Properties][39]
-        -   [fields][40]
-        -   [isValid][41]
-        -   [isLocked][42]
-        -   [isLoading][43]
-        -   [validate][44]
-        -   [errors][45]
-        -   [element][46]
-        -   [progressBar][47]
-        -   [messagePanel][48]
-        -   [errorPanel][49]
-    -   [FieldTags][50]
-    -   [Field][51]
-        -   [Parameters][52]
-        -   [name][53]
-        -   [element][54]
-        -   [wrapper][55]
-        -   [value][56]
-        -   [isHidden][57]
-        -   [placeholder][58]
-        -   [error][59]
-        -   [note][60]
-        -   [isValid][61]
-        -   [isLocked][62]
-        -   [validate][63]
-        -   [setWrapper][64]
-        -   [options][65]
-            -   [Parameters][66]
--   [HttpService][67]
-    -   [subscriptions][68]
-    -   [subscribe][69]
-        -   [Parameters][70]
-        -   [Properties][71]
-    -   [get][72]
+-   [DialogService][12]
+    -   [CloseAttribute][13]
+    -   [Dialog][14]
+        -   [Parameters][15]
+    -   [DialogObject][16]
+        -   [wrapper][17]
+        -   [overlay][18]
+        -   [window][19]
+        -   [content][20]
+        -   [progressBar][21]
+        -   [bringForward][22]
+        -   [open][23]
+        -   [close][24]
+            -   [Parameters][25]
+    -   [ConfirmDialog][26]
+        -   [Parameters][27]
+-   [FormHelpers][28]
+    -   [Form][29]
+        -   [Parameters][30]
+        -   [wrapper][31]
+        -   [data][32]
+        -   [callback][33]
+        -   [field][34]
+            -   [Properties][35]
+        -   [fields][36]
+        -   [isValid][37]
+        -   [isLocked][38]
+        -   [isLoading][39]
+        -   [validate][40]
+        -   [errors][41]
+        -   [element][42]
+        -   [progressBar][43]
+        -   [messagePanel][44]
+        -   [errorPanel][45]
+    -   [FieldTags][46]
+    -   [Field][47]
+        -   [Parameters][48]
+        -   [name][49]
+        -   [element][50]
+        -   [wrapper][51]
+        -   [value][52]
+        -   [isHidden][53]
+        -   [placeholder][54]
+        -   [error][55]
+        -   [note][56]
+        -   [isValid][57]
+        -   [isLocked][58]
+        -   [validate][59]
+        -   [setWrapper][60]
+        -   [options][61]
+            -   [Parameters][62]
+-   [HttpService][63]
+    -   [subscriptions][64]
+    -   [subscribe][65]
+        -   [Parameters][66]
+        -   [Properties][67]
+    -   [get][68]
+        -   [Parameters][69]
+    -   [post][70]
+        -   [Parameters][71]
+    -   [getQueryParam][72]
         -   [Parameters][73]
-    -   [post][74]
-        -   [Parameters][75]
-    -   [getQueryParam][76]
-        -   [Parameters][77]
--   [ProgressBar][78]
-    -   [Parameters][79]
-    -   [Properties][80]
--   [Toaster][81]
-    -   [toast][82]
-        -   [Parameters][83]
+-   [Listeners][74]
+    -   [ButtonGroupClickEvents][75]
+    -   [HoverSpin][76]
+    -   [Linkable][77]
+    -   [Ripple][78]
+-   [Listeners][79]
+    -   [ButtonGroupClickEvents][80]
+    -   [HoverSpin][81]
+    -   [Linkable][82]
+    -   [Ripple][83]
+-   [ProgressBar][84]
+    -   [Parameters][85]
+    -   [Properties][86]
+-   [Toaster][87]
+    -   [toast][88]
+        -   [Parameters][89]
 
 ## CommonHelpers
 
@@ -96,9 +102,9 @@ Validates if the provided object is a DOM Element.
 
 #### Parameters
 
--   `obj` **[Object][84]** Object to test.
+-   `obj` **[Object][90]** Object to test.
 
-Returns **[boolean][85]** \*
+Returns **[boolean][91]** \*
 
 ### isFunction
 
@@ -106,55 +112,447 @@ Validates if the provided object is a Function.
 
 #### Parameters
 
--   `functionToCheck` **[Object][84]** Object to test.
+-   `functionToCheck` **[Object][90]** Object to test.
 
-Returns **[boolean][85]** \*
+Returns **[boolean][91]** \*
 
 ### findHighestZIndex
 
 Finds and returns the document's highest z-index.
 
-Type: [function][86]
+Type: [function][92]
 
-Returns **[number][87]** highest z-index
+Returns **[number][93]** highest z-index
 
 ### generateDeferredPromise
 
 Generates a DeferredPromise, like those used in JQuery. Avoid using, a standard Promise should be used in its place.
 
-Type: [function][86]
+Type: [function][92]
 
-Returns **{promise: [Promise][88], resolve: [function][86], reject: [function][86]}** Deferred Promise Object
+Returns **{promise: [Promise][94], resolve: [function][92], reject: [function][92]}** Deferred Promise Object
 
 ### seekElementInBranch
 
 Walks up a node tree looking for a criteria match, returning the matched Element or a Null.
 
-Type: [function][86]
+Type: [function][92]
 
 #### Parameters
 
--   `startingElement` **[element][89]** Node branch to search.
--   `searchMethod` **[string][90]** Node attribute to be checked. Accepts "hasId", "hasClass", "hasAttribute" \*
--   `searchIdentifier` **[string][90]** Node value to find.
+-   `startingElement` **[element][95]** Node branch to search.
+-   `searchMethod` **[string][96]** Node attribute to be checked. Accepts "hasId", "hasClass", "hasAttribute", 'hasNodeName" \*
+-   `searchIdentifier` **[string][96]** Node value to find.
 
-Returns **([element][89] | null)** Seeker result
+Returns **([element][95] | null)** Seeker result
 
 ### isStringOrStringArray
 
 Checks if the provided object is a string or string array. Returns string array if validation is passed, else a null is returned.
 
-Type: [function][86]
+Type: [function][92]
 
 #### Parameters
 
--   `test` **([String][90] \| [Array][91]&lt;[String][90]>)** Object to check
+-   `test` **([String][96] \| [Array][97]&lt;[String][96]>)** Object to check
 
-Returns **([Array][91]&lt;[String][90]> | null)** String Array or Null if object does not pass validation.
+Returns **([Array][97]&lt;[String][96]> | null)** String Array or Null if object does not pass validation.
 
-## CommonListeners
+## DialogService
+
+Service used for generating DialogObjects
+
+### CloseAttribute
+
+Element Attribute that is used for click-to-close elements. The attributes value will be sent in the promise response.
+
+Type: [string][96]
+
+### Dialog
+
+Generates a Dialog Object
+
+Type: [function][92]
+
+#### Parameters
+
+-   `options` **[object][90]** Configuration Object
+    -   `options.content` **([string][96] \| [element][95])** HTML or Element to be rendered in the dialog element.
+    -   `options.width` **[string][96]** Dialog Window Width. Must define unit (px,pt,em) (optional, default `'auto'`)
+    -   `options.useOverlayClose` **[boolean][91]** Use overlay click-to-close feature. (optional, default `true`)
+    -   `options.classes` **[Array][97]&lt;[string][96]>** Classes to be applied to the wrapper element. (optional, default `[]`)
+
+Returns **[Object][90]** new DialogObject
+
+### DialogObject
+
+A Dialog Interface Object
+
+Type: Dialog
+
+#### wrapper
+
+Dialog Wrapper DOM Element
+
+Type: [Element][95]
+
+#### overlay
+
+Dialog Overlay DOM Element
+
+Type: [Element][95]
+
+#### window
+
+Dialog Window DOM Element
+
+Type: [Element][95]
+
+#### content
+
+Gets/Sets the Dialog Window's content. Setter expects an HTML string or DOM Element.
+
+Type: HTML
+
+#### progressBar
+
+The Dialog Windows ProgressBar. Null if one is not found.
+
+Type: ([ProgressBar][98] | null)
+
+#### bringForward
+
+Updates the dialog's elevation so that it is the highest object in the z-index stack.
+
+Type: [function][92]
+
+#### open
+
+Opens the dialog.
+
+Type: [function][92]
+
+Returns **[Promise][94]** 
+
+#### close
+
+Closes the dialog.
+
+Type: [function][92]
+
+##### Parameters
+
+-   `data` **[object][90]** Data to be returned to any active Open/Close promises.
+-   `immediate` **bool** Close the window immediately or wait for the specified timeout period before closing.
+-   `timeout` **bool** Number of milliseconds to wait before closing.
+
+Returns **[Promise][94]** 
+
+### ConfirmDialog
+
+Type: [function][92]
+
+#### Parameters
+
+-   `options` **[object][90]** Configuration Object
+    -   `options.title` **([string][96] \| [element][95])** Dialog Window Title
+    -   `options.message` **([string][96] \| [element][95])** Dialog Window Message
+    -   `options.width` **[string][96]** Dialog Window Width. Must define unit (px,pt,em) (optional, default `'auto'`)
+    -   `options.actions` **[Array][97]&lt;{label: [string][96], value: [string][96], classes: ([string][96] \| [Array][97]&lt;[string][96]>), styles: ([string][96] \| [Array][97]&lt;[string][96]>)}>** Dialog window action settings. An action's value will be returned in Open/Close Promise Resolution if clicked. (optional, default `[{label:'cancel',value:'canceled'},{label:'ok',classes:['flat','primary'],value:'Confirmed'}]`)
+    -   `options.useOverlayClose` **[boolean][91]** Use overlay click-to-close feature. (optional, default `true`)
+    -   `options.classes` **[Array][97]&lt;[string][96]>** Classes to be applied to the wrapper element. (optional, default `[]`)
+
+Returns **[Object][90]** new DialogObject
+
+## FormHelpers
+
+Used to generate Helper Objects for managing forms and their fields.
+
+### Form
+
+Generate a FormHelper
+
+Type: [function][92]
+
+#### Parameters
+
+-   `target` **[object][90]** DOM Element to be managed. If no form obj is found one will be added as the element's parent.
+-   `callback` **[function][92]** Function to be called when the form is submitted.
+
+Returns **{field: [function][92], fields: [Array][97]&lt;Field>, callback: [function][92], data: [Object][90], validate: [function][92], isValid: [boolean][91], isLocked: [boolean][91], isLoading: [boolean][91], element: [element][95], wrapper: [element][95], errors: [Array][97]&lt;{fieldName: [string][96], errors: [Array][97]&lt;[string][96]>}>, progressBar: {element: [element][95], isLoading: [boolean][91]}, errorPanel: {element: [element][95], text: [string][96]}, messagePanel: {element: [element][95], text: [string][96]}}** 
+
+#### wrapper
+
+Form Wrapper DOM Element
+
+Type: [Element][95]
+
+#### data
+
+Returns Current Form Data
+
+Type: [Object][90]
+
+#### callback
+
+Gets/Sets the function to be called when the validated form is submitted.
+
+Type: [Object][90]
+
+#### field
+
+Get a Field by field name
+
+Type: [Function][92]
+
+##### Properties
+
+-   `name` **[string][96]** Form Field's Name
+
+Returns **[Object][90]** [Field][99]
+
+#### fields
+
+Gets an array of the target form's fields
+
+Type: [Array][97]&lt;[Object][90]>
+
+#### isValid
+
+Returns the last evaluation state.
+
+Type: [boolean][91]
+
+#### isLocked
+
+Gets/Sets the locked state indicator of the form.
+
+Type: [boolean][91]
+
+#### isLoading
+
+Gets/Sets the loading state indicator of the form.
+
+Type: [boolean][91]
+
+#### validate
+
+Validates the form and sets/clears the error messages, and returns a boolean.
+
+Type: [function][92]
+
+Returns **[boolean][91]** 
+
+#### errors
+
+\*\* Gets/Sets the form errors.
+
+Type: [Array][97]&lt;{fieldName: [string][96], errors: [Array][97]&lt;[string][96]>}>
+
+#### element
+
+Form DOM Element
+
+Type: [element][95]
+
+#### progressBar
+
+Form Progress Bar
+
+Type: [ProgressBar][98]
+
+#### messagePanel
+
+Returns an object containing the messagePanel element, and a getter/setter for the text.
+
+Type: {element: [element][95], text: [string][96]}
+
+#### errorPanel
+
+Returns an object containing the messagePanel element, and a getter/setter for the text.
+
+Type: {element: [element][95], text: [string][96]}
+
+### FieldTags
+
+Allowed Field Tags
+
+Type: [Array][97]&lt;[string][96]>
+
+### Field
+
+Generate a FieldHelper
+
+Type: [function][92]
+
+#### Parameters
+
+-   `target` **[object][90]** Field DOM Element. A 'form-input' parent will be added if one is not found, unless target.type is 'hidden'.
+
+Returns **{name: [string][96], value: any, setWrapper: [function][92], validate: [function][92], isValid: [boolean][91], isLocked: [boolean][91], isHidden: [boolean][91], element: [element][95], wrapper: [element][95], error: {element: [element][95], text: [text][100]}, note: {element: [element][95], text: [text][100]}, placeholder: {element: [element][95], text: [text][100]}}** 
+
+#### name
+
+Gets/Sets the fields name.
+
+Type: [Element][95]
+
+#### element
+
+Returns the Field DOM Element
+
+Type: [Element][95]
+
+#### wrapper
+
+Returns the .form-input parentElement
+
+Type: [Element][95]
+
+#### value
+
+Gets/Sets the Field Value
+
+Type: [Element][95]
+
+#### isHidden
+
+Gets/Sets the hidden state indicator of the Field.
+
+Type: [boolean][91]
+
+#### placeholder
+
+Returns an object containing the placeholder element, and a getter/setter for the text.
+
+Type: {element: [element][95], text: [string][96]}
+
+#### error
+
+Returns an object containing the error element, and a getter/setter for the text.
+
+Type: {element: [element][95], text: [string][96]}
+
+#### note
+
+Returns an object containing the error element, and a getter/setter for the text.
+
+Type: {element: [element][95], text: [string][96]}
+
+#### isValid
+
+Returns the last evaluation state.
+
+Type: [boolean][91]
+
+#### isLocked
+
+Gets/Sets the locked state indicator.
+
+Type: [boolean][91]
+
+#### validate
+
+Validates the field and sets/clears the error message, and returns a boolean.
+
+Type: [function][92]
+
+Returns **[boolean][91]** 
+
+#### setWrapper
+
+Establishes a wrapper and it's required childrenfor the field if one does not exist.
+
+Type: [function][92]
+
+#### options
+
+\*\* Only available for select fields. Gets/Sets the fields options.
+
+Type: [Array][97]&lt;{text: [string][96], value: [string][96], selected: [boolean][91]}>
+
+##### Parameters
+
+-   `options` **[Array][97]&lt;{text: [string][96], value: [string][96], selected: [boolean][91]}>** 
+
+## HttpService
+
+Generates a new HttpService Object
+
+Type: [function][92]
+
+Returns **{subscribe: [function][92], get: [function][92], post: [function][92], getQueryParam: [function][92]}** HttpService Object
+
+### subscriptions
+
+Gets an array of subscriber callbacks.
+
+Type: [Array][97]&lt;[function][92]>
+
+### subscribe
+
+Subscribes to the HttpService. An EventData object will be passed into the provided callback when a monitored event occurs.
+
+Type: [Function][92]
+
+#### Parameters
+
+-   `callback`  
+
+#### Properties
+
+-   `callback` **[function][92]** function to be called on event.
+
+### get
+
+Passes a basic GET request to the provided URL, and returns its response.
+
+Type: [Function][92]
+
+#### Parameters
+
+-   `url` **[string][96]** Request URL.
+
+### post
+
+Makes a basic POST request to the provided URL, and returns its response.
+
+Type: [Function][92]
+
+#### Parameters
+
+-   `url` **[string][96]** Request URL.
+-   `data` **[Object][90]** Data to be passed.
+-   `contentType` **[string][96]** ContentType to be used in the request header. (optional, default `defaultContentType`)
+
+### getQueryParam
+
+Searches a URL for the requested Parameter. If found its value is returned.
+
+Type: [Function][92]
+
+#### Parameters
+
+-   `paramName` **[string][96]** Query String Parameter to search for.
+-   `url` **[string][96]** URL to search. If one is not provided, window.location will be used by default. (optional, default `null`)
+
+Returns **[string][96]** Query String Parameter Value or undefined object.
+
+## Listeners
 
 Global Event Listeners that are commonly used.
+
+### ButtonGroupClickEvents
+
+Listens for "Click" events on 'button, .button' children of a '.button-group' container. Add the class 'no-toggle' to a button or to the button-group to prevent toggling.
+
+Type: EventListener
+
+### HoverSpin
+
+Listens for a "mouseenter" events on ‹i› objects with an attribute of 'hover-spin', and applies the css class .fa-spin.
+
+Type: EventListener
 
 ### Linkable
 
@@ -168,431 +566,73 @@ Listens for "Click" events on buttons or objects with a class of 'ripple', and r
 
 Type: EventListener
 
+## Listeners
+
+Global Event Listeners that are commonly used.
+
+### ButtonGroupClickEvents
+
+Listens for "Click" events on 'button, .button' children of a '.button-group' container. Add the class 'no-toggle' to a button or to the button-group to prevent toggling.
+
+Type: EventListener
+
 ### HoverSpin
 
 Listens for a "mouseenter" events on ‹i› objects with an attribute of 'hover-spin', and applies the css class .fa-spin.
 
 Type: EventListener
 
-## DialogService
+### Linkable
 
-Service used for generating DialogObjects
+Listens for "Click" events on objects with an attribute of 'linkable', and redirects the window to the 'linkable' attribute value.
 
-### CloseAttribute
+Type: EventListener
 
-Element Attribute that is used for click-to-close elements. The attributes value will be sent in the promise response.
+### Ripple
 
-Type: [string][90]
+Listens for "Click" events on buttons or objects with a class of 'ripple', and redirects the window to the 'linkable' attribute value.
 
-### Dialog
-
-Generates a Dialog Object
-
-Type: [function][86]
-
-#### Parameters
-
--   `options` **[object][84]** Configuration Object
-    -   `options.content` **([string][90] \| [element][89])** HTML or Element to be rendered in the dialog element.
-    -   `options.width` **[string][90]** Dialog Window Width. Must define unit (px,pt,em) (optional, default `'auto'`)
-    -   `options.useOverlayClose` **[boolean][85]** Use overlay click-to-close feature. (optional, default `true`)
-    -   `options.classes` **[Array][91]&lt;[string][90]>** Classes to be applied to the wrapper element. (optional, default `[]`)
-
-Returns **[Object][84]** new DialogObject
-
-### DialogObject
-
-A Dialog Interface Object
-
-Type: Dialog
-
-#### wrapper
-
-Dialog Wrapper DOM Element
-
-Type: [Element][89]
-
-#### overlay
-
-Dialog Overlay DOM Element
-
-Type: [Element][89]
-
-#### window
-
-Dialog Window DOM Element
-
-Type: [Element][89]
-
-#### content
-
-Gets/Sets the Dialog Window's content. Setter expects an HTML string or DOM Element.
-
-Type: HTML
-
-#### progressBar
-
-The Dialog Windows ProgressBar. Null if one is not found.
-
-Type: ([ProgressBar][92] | null)
-
-#### bringForward
-
-Updates the dialog's elevation so that it is the highest object in the z-index stack.
-
-Type: [function][86]
-
-#### open
-
-Opens the dialog.
-
-Type: [function][86]
-
-Returns **[Promise][88]** 
-
-#### close
-
-Closes the dialog.
-
-Type: [function][86]
-
-##### Parameters
-
--   `data` **[object][84]** Data to be returned to any active Open/Close promises.
--   `immediate` **bool** Close the window immediately or wait for the specified timeout period before closing.
--   `timeout` **bool** Number of milliseconds to wait before closing.
-
-Returns **[Promise][88]** 
-
-### ConfirmDialog
-
-Type: [function][86]
-
-#### Parameters
-
--   `options` **[object][84]** Configuration Object
-    -   `options.title` **([string][90] \| [element][89])** Dialog Window Title
-    -   `options.message` **([string][90] \| [element][89])** Dialog Window Message
-    -   `options.width` **[string][90]** Dialog Window Width. Must define unit (px,pt,em) (optional, default `'auto'`)
-    -   `options.actions` **[Array][91]&lt;{label: [string][90], value: [string][90], classes: ([string][90] \| [Array][91]&lt;[string][90]>), styles: ([string][90] \| [Array][91]&lt;[string][90]>)}>** Dialog window action settings. An action's value will be returned in Open/Close Promise Resolution if clicked. (optional, default `[{label:'cancel',value:'canceled'},{label:'ok',classes:['raised'],value:'Confirmed'}]`)
-    -   `options.useOverlayClose` **[boolean][85]** Use overlay click-to-close feature. (optional, default `true`)
-    -   `options.classes` **[Array][91]&lt;[string][90]>** Classes to be applied to the wrapper element. (optional, default `[]`)
-
-Returns **[Object][84]** new DialogObject
-
-## FormHelpers
-
-Used to generate Helper Objects for managing forms and their fields.
-
-### Form
-
-Generate a FormHelper
-
-Type: [function][86]
-
-#### Parameters
-
--   `target` **[object][84]** DOM Element to be managed. If no form obj is found one will be added as the element's parent.
--   `callback` **[function][86]** Function to be called when the form is submitted.
-
-Returns **{field: [function][86], fields: [Array][91]&lt;Field>, callback: [function][86], data: [Object][84], validate: [function][86], isValid: [boolean][85], isLocked: [boolean][85], isLoading: [boolean][85], element: [element][89], wrapper: [element][89], errors: [Array][91]&lt;{fieldName: [string][90], errors: [Array][91]&lt;[string][90]>}>, progressBar: {element: [element][89], isLoading: [boolean][85]}, errorPanel: {element: [element][89], text: [string][90]}, messagePanel: {element: [element][89], text: [string][90]}}** 
-
-#### wrapper
-
-Form Wrapper DOM Element
-
-Type: [Element][89]
-
-#### data
-
-Returns Current Form Data
-
-Type: [Object][84]
-
-#### callback
-
-Gets/Sets the function to be called when the validated form is submitted.
-
-Type: [Object][84]
-
-#### field
-
-Get a Field by field name
-
-Type: [Function][86]
-
-##### Properties
-
--   `name` **[string][90]** Form Field's Name
-
-Returns **[Object][84]** [Field][93]
-
-#### fields
-
-Gets an array of the target form's fields
-
-Type: [Array][91]&lt;[Object][84]>
-
-#### isValid
-
-Returns the last evaluation state.
-
-Type: [boolean][85]
-
-#### isLocked
-
-Gets/Sets the locked state indicator of the form.
-
-Type: [boolean][85]
-
-#### isLoading
-
-Gets/Sets the loading state indicator of the form.
-
-Type: [boolean][85]
-
-#### validate
-
-Validates the form and sets/clears the error messages, and returns a boolean.
-
-Type: [function][86]
-
-Returns **[boolean][85]** 
-
-#### errors
-
-\*\* Gets/Sets the form errors.
-
-Type: [Array][91]&lt;{fieldName: [string][90], errors: [Array][91]&lt;[string][90]>}>
-
-#### element
-
-Form DOM Element
-
-Type: [element][89]
-
-#### progressBar
-
-Form Progress Bar
-
-Type: [ProgressBar][92]
-
-#### messagePanel
-
-Returns an object containing the messagePanel element, and a getter/setter for the text.
-
-Type: {element: [element][89], text: [string][90]}
-
-#### errorPanel
-
-Returns an object containing the messagePanel element, and a getter/setter for the text.
-
-Type: {element: [element][89], text: [string][90]}
-
-### FieldTags
-
-Allowed Field Tags
-
-Type: [Array][91]&lt;[string][90]>
-
-### Field
-
-Generate a FieldHelper
-
-Type: [function][86]
-
-#### Parameters
-
--   `target` **[object][84]** Field DOM Element. A 'form-input' parent will be added if one is not found, unless target.type is 'hidden'.
-
-Returns **{name: [string][90], value: any, setWrapper: [function][86], validate: [function][86], isValid: [boolean][85], isLocked: [boolean][85], isHidden: [boolean][85], element: [element][89], wrapper: [element][89], error: {element: [element][89], text: [text][94]}, note: {element: [element][89], text: [text][94]}, placeholder: {element: [element][89], text: [text][94]}}** 
-
-#### name
-
-Gets/Sets the fields name.
-
-Type: [Element][89]
-
-#### element
-
-Returns the Field DOM Element
-
-Type: [Element][89]
-
-#### wrapper
-
-Returns the .form-input parentElement
-
-Type: [Element][89]
-
-#### value
-
-Gets/Sets the Field Value
-
-Type: [Element][89]
-
-#### isHidden
-
-Gets/Sets the hidden state indicator of the Field.
-
-Type: [boolean][85]
-
-#### placeholder
-
-Returns an object containing the placeholder element, and a getter/setter for the text.
-
-Type: {element: [element][89], text: [string][90]}
-
-#### error
-
-Returns an object containing the error element, and a getter/setter for the text.
-
-Type: {element: [element][89], text: [string][90]}
-
-#### note
-
-Returns an object containing the error element, and a getter/setter for the text.
-
-Type: {element: [element][89], text: [string][90]}
-
-#### isValid
-
-Returns the last evaluation state.
-
-Type: [boolean][85]
-
-#### isLocked
-
-Gets/Sets the locked state indicator.
-
-Type: [boolean][85]
-
-#### validate
-
-Validates the field and sets/clears the error message, and returns a boolean.
-
-Type: [function][86]
-
-Returns **[boolean][85]** 
-
-#### setWrapper
-
-Establishes a wrapper and it's required childrenfor the field if one does not exist.
-
-Type: [function][86]
-
-#### options
-
-\*\* Only available for select fields. Gets/Sets the fields options.
-
-Type: [Array][91]&lt;{text: [string][90], value: [string][90], selected: [boolean][85]}>
-
-##### Parameters
-
--   `options` **[Array][91]&lt;{text: [string][90], value: [string][90], selected: [boolean][85]}>** 
-
-## HttpService
-
-Generates a new HttpService Object
-
-Type: [function][86]
-
-Returns **{subscribe: [function][86], get: [function][86], post: [function][86], getQueryParam: [function][86]}** HttpService Object
-
-### subscriptions
-
-Gets an array of subscriber callbacks.
-
-Type: [Array][91]&lt;[function][86]>
-
-### subscribe
-
-Subscribes to the HttpService. An EventData object will be passed into the provided callback when a monitored event occurs.
-
-Type: [Function][86]
-
-#### Parameters
-
--   `callback`  
-
-#### Properties
-
--   `callback` **[function][86]** function to be called on event.
-
-### get
-
-Passes a basic GET request to the provided URL, and returns its response.
-
-Type: [Function][86]
-
-#### Parameters
-
--   `url` **[string][90]** Request URL.
-
-### post
-
-Makes a basic POST request to the provided URL, and returns its response.
-
-Type: [Function][86]
-
-#### Parameters
-
--   `url` **[string][90]** Request URL.
--   `data` **[Object][84]** Data to be passed.
--   `contentType` **[string][90]** ContentType to be used in the request header. (optional, default `defaultContentType`)
-
-### getQueryParam
-
-Searches a URL for the requested Parameter. If found its value is returned.
-
-Type: [Function][86]
-
-#### Parameters
-
--   `paramName` **[string][90]** Query String Parameter to search for.
--   `url` **[string][90]** URL to search. If one is not provided, window.location will be used by default. (optional, default `null`)
-
-Returns **[string][90]** Query String Parameter Value or undefined object.
+Type: EventListener
 
 ## ProgressBar
 
 Generate a ProgressBar
 
-Type: [function][86]
+Type: [function][92]
 
 ### Parameters
 
--   `options` **[Object][84]**  (optional, default `{target:null,theme:'accent',type:'indeterminate'}`)
-    -   `options.target` **[Element][89]?** Binds return object to an existing DOM Element.
-    -   `options.theme` **[string][90]** Applies a theme class to the ProgressBar. (optional, default `'accent'`)
-    -   `options.type` **[string][90]** Applies a type class to the ProgressBar. (optional, default `'indeterminate'`)
+-   `options` **[Object][90]**  (optional, default `{target:null,theme:'accent',type:'indeterminate'}`)
+    -   `options.target` **[Element][95]?** Binds return object to an existing DOM Element.
+    -   `options.theme` **[string][96]** Applies a theme class to the ProgressBar. (optional, default `'accent'`)
+    -   `options.type` **[string][96]** Applies a type class to the ProgressBar. (optional, default `'indeterminate'`)
 
 ### Properties
 
--   `element` **[Element][89]** The ProgressBar DOM Element.
--   `isLoading` **[boolean][85]** The ProgressBar's loading state.
+-   `element` **[Element][95]** The ProgressBar DOM Element.
+-   `isLoading` **[boolean][91]** The ProgressBar's loading state.
 
-Returns **{element: [element][89], isLoading: [boolean][85]}** 
+Returns **{element: [element][95], isLoading: [boolean][91]}** 
 
 ## Toaster
 
 Generates a new Toaster Object
 
-Type: [function][86]
+Type: [function][92]
 
-Returns **{toaster: [function][86]}** 
+Returns **{toaster: [function][92]}** 
 
 ### toast
 
 #### Parameters
 
--   `options` **[Object][84]** 
-    -   `options.message` **[string][90]** Message to be displayed.
-    -   `options.duration` **[number][87]** milliseconds of time to display toast. Set to null/undefined to display indefinitely. (optional, default `2000`)
-    -   `options.actions` **[Array][91]&lt;{label: [string][90], classes: [string][90], value: [string][90]}>** Toast Actions. (optional, default `[{label:'ok'}]`)
-    -   `options.classes` **[Array][91]&lt;[string][90]>** Additional classes to be applied to the Toast Element. (optional, default `[]`)
+-   `options` **[Object][90]** 
+    -   `options.message` **[string][96]** Message to be displayed.
+    -   `options.duration` **[number][93]** milliseconds of time to display toast. Set to null/undefined to display indefinitely. (optional, default `2000`)
+    -   `options.actions` **[Array][97]&lt;{label: [string][96], classes: [string][96], value: [string][96]}>** Toast Actions. (optional, default `[{label:'ok'}]`)
+    -   `options.classes` **[Array][97]&lt;[string][96]>** Additional classes to be applied to the Toast Element. (optional, default `[]`)
 
-Returns **[Promise][88]&lt;[string][90]>** The clicked actions value will be sent in the returned Promise's resolution. If no value is provided, label value will be sent. If the toast is closed by the duration timer, "timeout" will be sent.
+Returns **[Promise][94]&lt;[string][96]>** The clicked actions value will be sent in the returned Promise's resolution. If no value is provided, label value will be sent. If the toast is closed by the duration timer, "timeout" will be sent.
 
 [1]: #commonhelpers
 
@@ -616,168 +656,180 @@ Returns **[Promise][88]&lt;[string][90]>** The clicked actions value will be sen
 
 [11]: #parameters-3
 
-[12]: #commonlisteners
+[12]: #dialogservice
 
-[13]: #linkable
+[13]: #closeattribute
 
-[14]: #ripple
+[14]: #dialog
 
-[15]: #hoverspin
+[15]: #parameters-4
 
-[16]: #dialogservice
+[16]: #dialogobject
 
-[17]: #closeattribute
+[17]: #wrapper
 
-[18]: #dialog
+[18]: #overlay
 
-[19]: #parameters-4
+[19]: #window
 
-[20]: #dialogobject
+[20]: #content
 
-[21]: #wrapper
+[21]: #progressbar
 
-[22]: #overlay
+[22]: #bringforward
 
-[23]: #window
+[23]: #open
 
-[24]: #content
+[24]: #close
 
-[25]: #progressbar
+[25]: #parameters-5
 
-[26]: #bringforward
+[26]: #confirmdialog
 
-[27]: #open
+[27]: #parameters-6
 
-[28]: #close
+[28]: #formhelpers
 
-[29]: #parameters-5
+[29]: #form
 
-[30]: #confirmdialog
+[30]: #parameters-7
 
-[31]: #parameters-6
+[31]: #wrapper-1
 
-[32]: #formhelpers
+[32]: #data
 
-[33]: #form
+[33]: #callback
 
-[34]: #parameters-7
+[34]: #field
 
-[35]: #wrapper-1
+[35]: #properties
 
-[36]: #data
+[36]: #fields
 
-[37]: #callback
+[37]: #isvalid
 
-[38]: #field
+[38]: #islocked
 
-[39]: #properties
+[39]: #isloading
 
-[40]: #fields
+[40]: #validate
 
-[41]: #isvalid
+[41]: #errors
 
-[42]: #islocked
+[42]: #element
 
-[43]: #isloading
+[43]: #progressbar-1
 
-[44]: #validate
+[44]: #messagepanel
 
-[45]: #errors
+[45]: #errorpanel
 
-[46]: #element
+[46]: #fieldtags
 
-[47]: #progressbar-1
+[47]: #field-1
 
-[48]: #messagepanel
+[48]: #parameters-8
 
-[49]: #errorpanel
+[49]: #name
 
-[50]: #fieldtags
+[50]: #element-1
 
-[51]: #field-1
+[51]: #wrapper-2
 
-[52]: #parameters-8
+[52]: #value
 
-[53]: #name
+[53]: #ishidden
 
-[54]: #element-1
+[54]: #placeholder
 
-[55]: #wrapper-2
+[55]: #error
 
-[56]: #value
+[56]: #note
 
-[57]: #ishidden
+[57]: #isvalid-1
 
-[58]: #placeholder
+[58]: #islocked-1
 
-[59]: #error
+[59]: #validate-1
 
-[60]: #note
+[60]: #setwrapper
 
-[61]: #isvalid-1
+[61]: #options
 
-[62]: #islocked-1
+[62]: #parameters-9
 
-[63]: #validate-1
+[63]: #httpservice
 
-[64]: #setwrapper
+[64]: #subscriptions
 
-[65]: #options
+[65]: #subscribe
 
-[66]: #parameters-9
+[66]: #parameters-10
 
-[67]: #httpservice
+[67]: #properties-1
 
-[68]: #subscriptions
+[68]: #get
 
-[69]: #subscribe
+[69]: #parameters-11
 
-[70]: #parameters-10
+[70]: #post
 
-[71]: #properties-1
+[71]: #parameters-12
 
-[72]: #get
+[72]: #getqueryparam
 
-[73]: #parameters-11
+[73]: #parameters-13
 
-[74]: #post
+[74]: #listeners
 
-[75]: #parameters-12
+[75]: #buttongroupclickevents
 
-[76]: #getqueryparam
+[76]: #hoverspin
 
-[77]: #parameters-13
+[77]: #linkable
 
-[78]: #progressbar-2
+[78]: #ripple
 
-[79]: #parameters-14
+[79]: #listeners-1
 
-[80]: #properties-2
+[80]: #buttongroupclickevents-1
 
-[81]: #toaster
+[81]: #hoverspin-1
 
-[82]: #toast
+[82]: #linkable-1
 
-[83]: #parameters-15
+[83]: #ripple-1
 
-[84]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[84]: #progressbar-2
 
-[85]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[85]: #parameters-14
 
-[86]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[86]: #properties-2
 
-[87]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[87]: #toaster
 
-[88]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[88]: #toast
 
-[89]: https://developer.mozilla.org/docs/Web/API/Element
+[89]: #parameters-15
 
-[90]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[90]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[91]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[91]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[92]: #progressbar
+[92]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[93]: #formhelpersfield
+[93]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[94]: https://developer.mozilla.org/docs/Web/HTML
+[94]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[95]: https://developer.mozilla.org/docs/Web/API/Element
+
+[96]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[97]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[98]: #progressbar
+
+[99]: #formhelpersfield
+
+[100]: https://developer.mozilla.org/docs/Web/HTML

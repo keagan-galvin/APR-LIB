@@ -1,0 +1,83 @@
+//Colors
+$primary-color: #013E5A;
+$accent-color: #19A2DC;
+
+$border-color: rgba(0, 0, 0, .15);
+
+$link-blue: #006185;
+
+$success-color: #677E33;
+$success-background: lighten($success-color, 55%);
+
+$info-color: #066186;
+$info-background: lighten($primary-color, 75%);
+
+$warn-color: #A72B2A;
+$warn-background: lighten($warn-color, 50%);
+
+$hover-color: rgba(0, 0, 0, .1);
+$click-color: darken($hover-color, 5%);
+
+$yellow: #FDE05E;
+$yellow-dark: #BAB33B;
+
+$dark-gray: #555;
+$gray: #777;
+$light-gray: #999;
+
+@function hover-color($bgColor) {
+    @if lightness($bgColor)>lightness(#aaa) {
+        @return rgba(0, 0, 0, .07);
+    }
+
+    @else {
+        @return rgba(255, 255, 255, .15);
+    }
+}
+
+@function hexToRGB($color) {
+    @return red($color),
+    green($color),
+    blue($color);
+}
+
+//Fonts
+$font-color: #333;
+$secondary-font-color: #777;
+$font-family: 'Roboto',
+sans-serif;
+
+//Sizes
+@function unit($size: 1) {
+    @return $size * 1.6rem;
+}
+
+$golden-rule: 2.3rem;
+
+// Media Queries
+$desktop: "only screen and (min-width: 1200px)";
+$tablet: "only screen and (min-width: 720px) and (max-width: 1199px)";
+$phone: "only screen and (max-width: 719px)";
+
+//MISC
+$border-radius: unit(.25);
+
+@mixin boxShadow($inset: false) {
+    @if $inset==false {
+        box-shadow: 0 .3rem .1rem -.2rem rgba(0, 0, 0, .2),
+            0 .2rem .2rem 0 rgba(0, 0, 0, .14),
+            0 .1rem .5rem 0 rgba(0, 0, 0, .12);
+    }
+
+    @else {
+        box-shadow: inset 0 .3rem .1rem -.2rem rgba(0, 0, 0, .2),
+            inset 0 .2rem .2rem 0 rgba(0, 0, 0, .14),
+            inset 0 .1rem .5rem 0 rgba(0, 0, 0, .12);
+    }
+}
+
+@mixin maxBoxShadow() {
+    box-shadow: 0 .5rem .5rem -.3rem rgba(0, 0, 0, .2),
+        0 .8rem 1rem .1rem rgba(0, 0, 0, .14),
+        0 .3rem 1.4rem .2rem rgba(0, 0, 0, .12);
+}

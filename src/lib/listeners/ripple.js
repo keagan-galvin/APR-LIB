@@ -1,33 +1,9 @@
 import {
     findHighestZIndex, seekElementInBranch
-} from "./CommonHelpers";
+} from "../CommonHelpers";
 
 /**
- * Global Event Listeners that are commonly used.
- * @namespace CommonListeners
- */
-
- /**
- * @memberof CommonListeners
- * @typedef {EventListener}
- * @name Linkable
- * @description Listens for "Click" events on objects with an attribute of 'linkable', and redirects the window to the 'linkable' attribute value.
- */
-document.addEventListener('click', Linkable);
-
-function Linkable(e) {
-    let target = e.target;
-
-    while (target) {
-        if (target.hasAttribute && target.hasAttribute('linkable')) break;
-        target = target.parentNode;
-    }
-
-    if (target) window.location.href = target.getAttribute('linkable');
-}
-
-/**
- * @memberof CommonListeners
+ * @memberof Listeners
  * @name Ripple
  * @typedef {EventListener}
  * @description Listens for "Click" events on buttons or objects with a class of 'ripple', and redirects the window to the 'linkable' attribute value.
@@ -128,83 +104,3 @@ function Ripple(e) {
     }
 
 }
-
-
-document.addEventListener('click', PanelClickEvent);
-
-function PanelClickEvent(e) {
-    const animationClass = 'animatable';
-    const expandedClass = 'expanded';
-    const rotateClass = 'fa-rotate-180';
-
-    let target = seekElementInBranch(e.target, 'hasAttribute', 'toggle-panel');
-
-    // If toggle clicked
-    if (target) {
-        e.preventDefault();
-
-        let panel, head, label, options, state, content;
-        let expanded = false;
-
-        // Ensure Panel wrapper
-        while (target) {
-            if (target.classList && target.classList.contains('panel')) break;
-            else target = target.parentNode;
-        }
-
-        // If found start.
-        if (target) {
-            panel = target;
-            head = panel.querySelector('.panel-head');
-            label = panel.querySelector('.panel-label');
-            options = panel.querySelector('.panel-options');
-            state = panel.querySelector('.panel-state');
-            content = panel.querySelector('.panel-content');
-
-            if (!state) throw Error("'.panel-state' not found.");
-            if (!content) throw Error("'.panel-content' not found.");
-
-            if (panel.hasAttribute('opened')) {
-                expanded = !eval(panel.getAttribute('opened'));
-            } else expanded = true;
-
-            // Prep Panel
-            panel.setAttribute('opened', expanded);
-            panel.classList.add(animationClass);
-            panel.addEventListener('transitionend', clearAnimationState, false);
-
-            if (expanded) {
-                panel.classList.add(expandedClass);
-                state.classList.add(rotateClass);
-            } else {
-                panel.classList.remove(expandedClass);
-                state.classList.remove(rotateClass);
-            }
-        }
-    }
-
-    function clearAnimationState(e) {
-        target.classList.remove(animationClass);
-    }
-}
-
-/**
- * @memberof CommonListeners
- * @name HoverSpin
- * @typedef {EventListener}
- * @description Listens for a "mouseenter" events on &lsaquo;i&rsaquo; objects with an attribute of 'hover-spin', and applies the css class .fa-spin.
- */
-document.addEventListener('mouseover', HoverSpin);
-
-function HoverSpin(e) {
-    let target = seekElementInBranch(e.target, 'hasAttribute', 'hover-spin');
-
-    if (target) {
-        if (target.tagName == 'I' && !target.classList.contains('fa-spin')) {
-            target.classList.add('fa-spin');
-            target.addEventListener('mouseleave', (e) => {
-                target.classList.remove('fa-spin');
-            });
-        }
-    }
-};

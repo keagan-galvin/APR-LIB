@@ -38,8 +38,17 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            jquery: "jquery/src/jquery"
+        }
+    },
     plugins: [
         //new MinifyPlugin(), // Enable For Production
-        //new webpack.optimize.AggressiveMergingPlugin(), // Enable For Production
+        //new webpack.optimize.AggressiveMergingPlugin(), // Enable For Production,
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ]
 };

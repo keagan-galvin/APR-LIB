@@ -1,0 +1,81 @@
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 2.3rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 2.3rem;
+}
+
+h3 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 2.3rem;
+}
+
+p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.3rem;
+}
+
+a {
+    color: $link-blue;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+        color: darken($link-blue, 10%);
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: $link-blue;
+    }
+}
+
+
+
+h1,
+h3,
+p,
+span,
+div,
+i,
+strong {
+    &.primary {
+        color: $primary-color;
+    }
+
+    &.accent {
+        color: $accent-color;
+    }
+
+    &.warn {
+        color: $warn-color;
+    }
+
+    &.success {
+        color: $success-color;
+    }
+
+    &.strong {
+        font-weight: 500;
+    }
+
+    &.stronger {
+        font-weight: 700;
+    }
+}
+
+.no-wrap {
+    white-space: nowrap;
+
+    &.ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

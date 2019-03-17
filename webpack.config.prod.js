@@ -2,6 +2,7 @@ const path = require('path');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const webpack = require('webpack');
 
+
 const bundles = require('./webpack.bundles');
 
 delete bundles.sample;
@@ -36,6 +37,11 @@ module.exports = {
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            jquery: "jquery/src/jquery"
+        }
     },
     plugins: [
         new MinifyPlugin(), // Enable For Production

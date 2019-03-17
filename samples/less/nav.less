@@ -3,13 +3,34 @@ nav {
     color: #fff;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: auto;
     flex-shrink: 0;
+    min-width: 200px;
+
+    &::-webkit-scrollbar {
+        width: unit(@spacing * .55, px);
+        overflow: hidden;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background-color: rgba(255,255,255,.7);
+    }
+
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,.3);
+    }
+    
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,.25); 
+    }
 
     .menu {
         .label {
-            padding: unit(@spacing, px);
-            padding-bottom: unit(@spacing * .5, px);
+            padding:unit(@spacing * 2, px)  unit(@spacing, px) unit(@spacing * .5, px) unit(@spacing, px);
             font-weight: 500;
             font-size: 1.2em;
         }
@@ -32,6 +53,10 @@ nav {
 
         &:hover {
             background-color: rgba(0,0,0,.15);
+        }
+
+        &.active {
+            background-color: rgba(0, 0, 0, 0.3);
         }
     }
 }

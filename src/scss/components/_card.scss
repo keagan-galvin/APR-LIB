@@ -1,0 +1,50 @@
+.card {
+    background-color: #fff;
+    border-radius: $border-radius;
+    @include boxShadow();
+
+    .card-toolbar {
+        .search {
+            display: flex;
+            flex-basis: 100%;
+            font-size: 1.3em;
+            align-items: center;
+
+            input {
+                border: 0;
+                width: 100% !important;
+                margin: 0 !important;
+                outline: none;
+                padding: unit(.25) unit(.5) 0 unit(.5);
+            }
+        }
+
+        & + .card-content  {
+            border-top: 1px solid $border-color;
+        }
+    }
+
+    &.primary {
+
+        .divider {
+            margin-left: unit(1.5);
+            margin-right: unit(1.5);
+        }
+
+        .card-toolbar  + .card-content {
+            border-top: 0 none;
+        }
+
+        .card-toolbar {
+            padding: unit(1) 0 unit(.75) 0;
+            margin: unit(.5) unit(1.5) 0 unit(1.5);
+            border-bottom: unit(.25) solid $accent-color;
+    
+            & .progress {
+                bottom: unit(-.25);
+            }
+        }
+
+        
+    }
+}

@@ -7,7 +7,9 @@ import {
 import {
     FieldTags
 } from "./FormHelpers";
-import { ProgressBar } from "./ProgressBar";
+import {
+    ProgressBar
+} from "./ProgressBar";
 
 /**
  * Service used for generating DialogObjects
@@ -63,7 +65,8 @@ export function Dialog({
 
         dialog.window.addEventListener('transitionend', dialogTransitionEndEvent);
 
-        dialog.wrapper.addEventListener('click', dialogClickEvent);
+        dialog.wrapper.addEventListener("click", dialogEventHandler);
+        dialog.wrapper.addEventListener("keyup", dialogEventHandler);
 
     }
 
@@ -105,7 +108,7 @@ export function Dialog({
          */
         Object.defineProperty(dialog, 'window', {
             get() {
-                return dialog.wrapper.querySelector('.dialog-window');
+                return dialog.wrapper.querySelector('.card');
             }
         });
 
@@ -124,7 +127,7 @@ export function Dialog({
                 setContent(c);
             }
         });
-        
+
         /**
          * @memberof DialogService.DialogObject  
          * @name progressBar
@@ -139,7 +142,7 @@ export function Dialog({
 
         wrapper.insertAdjacentHTML('afterbegin',
             `<div class="overlay" ${useOverlayClose ? `${CloseAttribute}="overlay-cancel"`: ''}></div>
-            <div class="dialog-window" ${width ? `style="width: ${width}"` : ''}></div>`
+            <div class="card" role="dialog" ${width ? `style="width: ${width}"` : ''}></div>`
         );
 
         if (content) setContent(content);
@@ -160,7 +163,7 @@ export function Dialog({
 
     function dialogTransitionEndEvent(e) {
         // Handle Window Transition End
-        if (e.target.classList && e.target.classList.contains('dialog-window')) {
+        if (e.target.classList && e.target.classList.contains('card')) {
             if (!e.target.classList.contains('opened')) {
                 if (dialog.wrapper.parentNode) dialog.wrapper.parentNode.removeChild(dialog.wrapper);
             } else {
@@ -169,11 +172,13 @@ export function Dialog({
         }
     }
 
-    function dialogClickEvent(e) {
-        if (isElement(e.target)) {
-            // Check for Click-To-Close
-            let target = seekElementInBranch(e.target, 'hasAttribute', CloseAttribute);
-            if (target && e.clientX !== 0 && e.clientY !== 0) {
+    function dialogEventHandler(e) {
+        let target;
+
+        // close Request
+        target = seekElementInBranch(e.target, 'hasAttribute', CloseAttribute);
+        if (target) {
+            if ((e.type == 'click' && e.clientX !== 0 && e.clientY !== 0) || (e.type == 'keyup' && e.keyCode === 13)) {
                 e.preventDefault();
                 let response = target.getAttribute(CloseAttribute);
                 close(response ? response : null, false);
@@ -238,9 +243,9 @@ export function Dialog({
 
         // return promise
         return new Promise((resolve, reject) => {
-            try {                
+            try {
                 document.removeEventListener('keyup', escapeClose);
-                
+
                 if (immediate) {
                     if (!dialog.window.classList.contains('immediate')) dialog.window.classList.add('immediate');
                     if (!dialog.overlay.classList.contains('immediate')) dialog.overlay.classList.add('immediate');
@@ -250,7 +255,7 @@ export function Dialog({
 
                 if (!immediate) {
                     if (dialog.window.classList.contains('immediate')) dialog.window.classList.remove('immediate');
-                    if (dialog.overlay.classList.contains('immediate')) dialog.overlay.classList.remove('immediate');                    
+                    if (dialog.overlay.classList.contains('immediate')) dialog.overlay.classList.remove('immediate');
                     if (deferral != null) setTimeout(() => deferral.resolve(data), timeout);
                     setTimeout(() => resolve(data), timeout);
                 }
@@ -288,7 +293,9 @@ export function Dialog({
         else dialog.window.insertAdjacentElement('afterbegin', c);
 
         if (dialog.window.querySelector('.progress')) {
-            dialog.progressBar = ProgressBar({ target: dialog.window.querySelector('.progress') });
+            dialog.progressBar = ProgressBar({
+                target: dialog.window.querySelector('.progress')
+            });
         }
     }
 
@@ -332,14 +339,13 @@ export function ConfirmDialog({
     title,
     message,
     width = 'auto',
-    actions = [
-        {
+    actions = [{
             label: 'cancel',
             value: 'canceled'
         },
         {
             label: 'ok',
-            classes: ['raised'],
+            classes: ['flat', 'primary'],
             value: 'Confirmed'
         }
     ],
@@ -347,14 +353,14 @@ export function ConfirmDialog({
     classes = []
 }) {
     const template = `
-        <div class="head">
-            <h3 class="title">${title}</h1>
-        </div>    
-        <div class="progress accent">
-            <div class="indeterminate"></div>
-        </div>
-        <div class="body">${message}</div>
-        <div class="actions">
+        <div class="card-toolbar">
+            <h3 class="card-title" >${title}</h1> 
+            <div class="progress accent">
+                <div class="indeterminate"></div>
+            </div>
+        </div>   
+        <div class="card-content">${message}</div>
+        <div class="card-toolbar actions">
             ${actions.map(action => templateAction(action)).join('')}
         </div>`;
 

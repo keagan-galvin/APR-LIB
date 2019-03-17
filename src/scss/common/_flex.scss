@@ -1,0 +1,82 @@
+.column {
+    display: flex;
+    flex-direction: column;
+}
+  
+.row {
+    display: flex;
+    flex-direction: row;
+
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+}
+
+.row, .column {
+    .fill {
+        flex-basis: 100%;
+    }
+}
+
+  
+@media #{$desktop} {
+    .desktop-column {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .desktop-row {
+        display: flex;
+        flex-direction: row !important;
+    }
+    
+    .desktop-row, .desktop-column {
+        .desktop-fill {
+            flex-basis: 100%;
+        }
+    }
+}
+
+@media #{$tablet} {
+    .tablet-column {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .tablet-row {
+        display: flex;
+        flex-direction: row !important;
+    } 
+
+    .tablet-row, .tablet-column {
+        .tablet-fill {
+            flex-basis: 100%;
+        }
+    }
+}
+
+@media #{$phone} {
+    .phone-column {
+        display: flex;
+        flex-direction: column !important;
+
+        &.phone-start {
+            align-items: flex-start !important;
+        }
+    }
+
+    .phone-row {
+        display: flex;
+        flex-direction: row !important;
+    }
+
+    .phone-row, .phone-column {
+        .phone-fill {
+            flex-basis: 100%;
+        }
+    }
+}

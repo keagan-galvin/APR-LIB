@@ -12,7 +12,7 @@ import {
     Toaster
 } from "./Toaster";
 
-require('./CommonListeners');
+require('./listeners');
 
 global.HttpService = HttpService();
 global.Toaster = Toaster();
