@@ -742,7 +742,7 @@ export function Field(target) {
          */
         field.setWrapper = () => {
             if (!field.wrapper) BuildFieldWrapper(field.element);
-            field.value = field.value;
+            else field.value = field.value;
         };
     }
 
@@ -849,7 +849,9 @@ function BuildFieldWrapper(element) {
             }
     }
 
-    return Field(element);
+    let field = Field(element);    
+    field.value = field.value;
+    return field;
 }
 
 export const validationPatterns = {
