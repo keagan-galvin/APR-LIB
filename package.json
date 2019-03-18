@@ -10,6 +10,7 @@
     "doc": "npm-run-all -p doc:*",
     "css:compile-scss": "node-sass-chokidar --source-map true src/scss/ -o dist",
     "css:css-autoprefixer": "postcss dist/*.css --use autoprefixer -d dist",
+    "css:css-yearEndTemp": "postcss dist/*.css --use autoprefixer -d C:/Users/kgalvin/source/repos/YearEndCollection/YearEndCollection/Content",
     "css": "npm-run-all -p css:*",
     "prod:webpack": "webpack --config webpack.config.prod.js --mode production",
     "prod": "npm-run-all -p prod:* css:* doc:*",

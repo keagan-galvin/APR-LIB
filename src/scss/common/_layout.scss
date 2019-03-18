@@ -70,6 +70,14 @@
     }
 }
 
+.elevate {
+    @include boxShadow();
+}
+
+.inset {
+    @include boxShadow(true);
+}
+
 
 @media #{$desktop} {
     .desktop-column {

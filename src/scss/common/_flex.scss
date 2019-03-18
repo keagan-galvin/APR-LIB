@@ -1,6 +1,18 @@
 .column {
     display: flex;
     flex-direction: column;
+
+    &.left {
+        align-items: flex-start;
+    }
+
+    &.right {
+        align-items: flex-start;
+    }
+    
+    &.bottom {
+        justify-content: flex-start;
+    }
 }
   
 .row {

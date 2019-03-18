@@ -1,25 +1,40 @@
-h1 {
-    font-size: 2.5rem;
+h1, .h1 {
+    font-size: unit(1.8);
+    font-weight: 700;
+    line-height: $golden-rule;
+}
+
+h2, .h2 {
+    font-size: unit(1.65);
+    font-weight: 700;
+    line-height: $golden-rule;
+}
+
+h3, .h3 {
+    font-size: unit(1.45);
+    font-weight: 700;
+    line-height: $golden-rule;
+}
+
+h4, .h4 {
+    font-size: unit(1.3);
     font-weight: 700;
     line-height: 2.3rem;
 }
 
-h2 {
-    font-size: 2.2rem;
+h5, .h5 {
     font-weight: 700;
-    line-height: 2.3rem;
+    line-height: $golden-rule;
 }
 
-h3 {
-    font-size: 1.9rem;
+h6, .h6 {
     font-weight: 700;
-    line-height: 2.3rem;
+    line-height: $golden-rule;
 }
 
 p {
-    font-size: 1.6rem;
     font-weight: 400;
-    line-height: 2.3rem;
+    line-height: $golden-rule;
 }
 
 a {

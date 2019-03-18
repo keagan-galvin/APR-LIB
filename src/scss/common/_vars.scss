@@ -49,10 +49,10 @@ sans-serif;
 
 //Sizes
 @function unit($size: 1) {
-    @return $size * 1.6rem;
+    @return $size * 1rem;
 }
 
-$golden-rule: 2.3rem;
+$golden-rule: 1.4375rem;
 
 // Media Queries
 $desktop: "only screen and (min-width: 1200px)";
