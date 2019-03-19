@@ -13,8 +13,8 @@
     }
     
     &:before {
-        padding: .5rem;
-        width: 11rem;
+        padding: unit(.3125);
+        width: unit(.6875);
         border-radius: $border-radius;
         background: rgba(0,0,0,.6);
         color: #fff;
@@ -26,7 +26,7 @@
     }
     
     &:after {
-        border: .8rem solid transparent;
+        border: unit(.5) solid transparent;
         width: 0;
         content: "";
         font-size: 0;
@@ -41,27 +41,27 @@
     
     /********** Tooltip Sizes **********/
     &.t-xl:before {
-        width: 20rem;
+        width: unit(1.25);
     }
     
     &.t-lg:before {
-        width: 17rem;
+        width: unit(1.0625);
     }
     
     &.t-md:before {
-        width: 14rem;
+        width: unit(.875);
     }
     
     &.t-sm:before {
-        width: 11rem;
+        width: unit(.6875);
     }
     
     &.t-xs:before {
-        width: 8rem;
+        width: unit(.5);
     }
 
     &.t-xxs:before {
-        width: 4rem;
+        width: unit(.25);
     }
     
     /********** Top Tooltip **********/

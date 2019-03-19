@@ -34,7 +34,7 @@
             }
 
             & + .group {
-                border-left: 1px solid $border-color;
+                border-left: unit(.0625) solid $border-color;
             }
             
             button {
@@ -57,7 +57,7 @@
             border: 0 none;
             color: $link-blue;
             font-weight: 500;
-            font-size: 1.6rem;
+            font-size: unit(1);
             font-family: $font-family;
 
             &:focus {

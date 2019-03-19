@@ -14,7 +14,7 @@
 
     &.dashed-divider {
         li {
-            border-bottom: .2rem dashed $border-color;
+            border-bottom: unit(.125) dashed $border-color;
             &:last-child {
                 border-bottom: 0 none;
             }
@@ -23,7 +23,7 @@
 
     &.solid-divider {
         li {
-            border-bottom: .1rem solid $border-color;
+            border-bottom: unit(.0625) solid $border-color;
             &:last-child {
                 border-bottom: 0 none;
             }

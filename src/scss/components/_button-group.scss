@@ -27,7 +27,7 @@
     button,
     .button {
         $h-padding: unit(.5);
-        $border: .1rem solid $border-color;
+        $border: unit(.0625) solid $border-color;
         $transition: 125ms ease-in-out;
 
         min-width: 0;
@@ -67,10 +67,10 @@
         &.active {
             @include boxShadow(true);
             background-color: #f5f5f5;
-            padding-right:  unit(.5) + .1rem !important;
+            padding-right:  unit(.5) + unit(.0625) !important;
             border: 0 none !important;
-            padding-top: .1rem;
-            padding-bottom: .1rem;
+            padding-top: unit(.0625);
+            padding-bottom: unit(.0625);
 
             &.flat,
             &.raised {

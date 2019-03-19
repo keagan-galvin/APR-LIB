@@ -2,7 +2,7 @@
     &.raised,
     &.flat {
         border: 0 none;
-        border-right: .1rem solid $border-color;
+        border-right: unit(.0625) solid $border-color;
         
         &.active {
             background-color: lighten($background-color, 10%);

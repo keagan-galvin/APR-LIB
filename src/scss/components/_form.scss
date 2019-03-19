@@ -4,8 +4,8 @@ $placeholder-font-size: unit(1);
 $placeholder-font-size-small: unit(.75);
 $placeholder-transition: 200ms ease-in-out;
 $input-font-size: unit(1);
-$input-top: 1.5rem;
-$input-height: 3rem;
+$input-top: unit(.9375);
+$input-height: unit(1.875);
 $input-border-color: $gray;
 $disabled-color: rgba(0, 0, 0, .52);
 
@@ -133,7 +133,7 @@ select {
         width: 100%;
         font-size: $input-font-size;
         border: 0;
-        border-bottom: .1rem solid $input-border-color;
+        border-bottom: unit(.0625) solid $input-border-color;
         transition: border-color $placeholder-transition;
         outline: none;
         padding: 0;
@@ -168,7 +168,7 @@ select {
             color: $highlight-color;
         }
 
-        border-bottom: .2rem solid $highlight-color;
+        border-bottom: unit(.125) solid $highlight-color;
     }
 
     &.error {
@@ -180,7 +180,7 @@ select {
         textarea,
         select {
             color: $warn-color;
-            border-bottom: .2rem solid $warn-color;
+            border-bottom: unit(.125) solid $warn-color;
         }
     }
 
@@ -191,7 +191,7 @@ select {
         color: $disabled-color;
         background-position: bottom;
         background-image: linear-gradient(to right, $disabled-color 0, $disabled-color 33%, transparent 0);
-        background-size: unit(.25) .1rem;
+        background-size: unit(.25) unit(.0625);
         background-repeat: repeat-x;
         border-bottom: none;
 
@@ -212,7 +212,7 @@ select {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    height: 2.2rem;
+    height: unit(1.375);
     margin-bottom: unit(1);
 
     input {
@@ -246,7 +246,7 @@ select {
         &:checked {
             ~.checkmark {
                 background-color: $link-blue;
-                border: .2rem solid $link-blue;
+                border: unit(.125) solid $link-blue;
 
                 &:after {
                     display: block;
@@ -259,21 +259,21 @@ select {
         position: absolute;
         top: 0;
         left: 0;
-        height: 2rem;
-        width: 2rem;
+        height: unit(1.25);
+        width: unit(1.25);
         border-radius: $border-radius;
-        border: .2rem solid rgba(0, 0, 0, .45);
+        border: unit(.125) solid rgba(0, 0, 0, .45);
 
         &:after {
             content: "";
             position: absolute;
             display: none;
-            left: .5rem;
-            top: .2rem;
-            width: .6rem;
-            height: 1rem;
+            left: unit(.3125);
+            top: unit(.125);
+            width: unit(.375);
+            height: unit(.625);
             border: solid white;
-            border-width: 0 .3rem .3rem 0;
+            border-width: 0 unit(.1875) unit(.1875) 0;
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);

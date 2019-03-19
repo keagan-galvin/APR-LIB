@@ -52,7 +52,7 @@ sans-serif;
     @return $size * 1rem;
 }
 
-$golden-rule: 1.4375rem;
+$golden-rule: unit(1.4375);
 
 // Media Queries
 $desktop: "only screen and (min-width: 1200px)";
@@ -64,20 +64,20 @@ $border-radius: unit(.25);
 
 @mixin boxShadow($inset: false) {
     @if $inset==false {
-        box-shadow: 0 .3rem .1rem -.2rem rgba(0, 0, 0, .2),
-            0 .2rem .2rem 0 rgba(0, 0, 0, .14),
-            0 .1rem .5rem 0 rgba(0, 0, 0, .12);
+        box-shadow: 0 unit(.1875) unit(.0625) unit(-0.125) rgba(0, 0, 0, .2),
+            0 unit(0.125) unit(0.125) 0 rgba(0, 0, 0, .14),
+            0 unit(.0625) unit(3.125) 0 rgba(0, 0, 0, .12);
     }
 
     @else {
-        box-shadow: inset 0 .3rem .1rem -.2rem rgba(0, 0, 0, .2),
-            inset 0 .2rem .2rem 0 rgba(0, 0, 0, .14),
-            inset 0 .1rem .5rem 0 rgba(0, 0, 0, .12);
+        box-shadow: inset 0 unit(.1875) unit(.0625) unit(-0.125) rgba(0, 0, 0, .2),
+            inset 0 unit(0.125) unit(0.125) 0 rgba(0, 0, 0, .14),
+            inset 0 unit(.0625) unit(3.125) 0 rgba(0, 0, 0, .12);
     }
 }
 
 @mixin maxBoxShadow() {
-    box-shadow: 0 .5rem .5rem -.3rem rgba(0, 0, 0, .2),
-        0 .8rem 1rem .1rem rgba(0, 0, 0, .14),
-        0 .3rem 1.4rem .2rem rgba(0, 0, 0, .12);
+    box-shadow: 0 unit(3.125) unit(3.125) unit(-.1875) rgba(0, 0, 0, .2),
+        0 unit(.5) unit(.625) unit(.0625) rgba(0, 0, 0, .14),
+        0 unit(.1875) unit(.875) unit(0.125) rgba(0, 0, 0, .12);
 }

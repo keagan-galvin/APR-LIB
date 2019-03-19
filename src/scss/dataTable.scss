@@ -13,7 +13,7 @@ table.data-table.dataTable {
     font-family: $font-family;
 
     thead > tr {
-        min-height: 5.6rem;
+        min-height: unit(3.5);
 
         th { 
             text-align: left;
@@ -23,7 +23,7 @@ table.data-table.dataTable {
     }
 
     tr {
-        height: 48px;
+        height: unit(3);
 
         &.warn {
             background-color: $warn-background;
@@ -83,7 +83,7 @@ table.data-table.dataTable {
         }
 
         td, th {
-            border-bottom: .1rem solid $border-color;
+            border-bottom: unit(.0625) solid $border-color;
             padding-left: unit(1.5);
             padding-right: 42px;
 
@@ -106,8 +106,8 @@ table.data-table.dataTable {
         padding-right: unit(1) + 2.3rem !important;
 
         &:after {
-            bottom: 1.4rem !important;
-            right: 1.8rem !important;
+            bottom: unit(.875) !important;
+            right: unit(1.125) !important;
         }
     }
 
@@ -135,7 +135,7 @@ table.data-table.dataTable {
             text-decoration: none;
             .hover-hide {
                 margin-left: unit(.5);
-                top: .1rem;
+                top: unit(.0625);
                 display: inline;
                 position: absolute;
             }
@@ -146,10 +146,10 @@ table.data-table.dataTable {
     }
 
     .row-actions {
-        font-size: 1.3rem;
+        font-size: unit(.8125);
         a.button.icon, button {         
             display: inline-block;
-            line-height: 3.3rem;
+            line-height: unit(2.0625);
         }
     }
 
@@ -166,7 +166,7 @@ table.data-table.dataTable {
     }
 
     .collapse {
-        width: .1rem !important;
+        width: unit(.0625) !important;
     }
 }
 
@@ -192,21 +192,21 @@ table.data-table.dataTable {
     }
 
     .dataTables_length {
-        padding: 1.1rem unit(1.5) !important;
+        padding: unit(.6875) unit(1.5) !important;
 
         select {
             width: auto !important;
             border: 0 none;
-            border-bottom: .1rem solid $light-gray;
+            border-bottom: unit(.0625) solid $light-gray;
             padding: unit(.25) unit(.5) unit(.25) 0;
         }
     }
 
     .dataTables_paginate {
-        padding: .7rem unit(1.5) !important;
+        padding: unit(.4375) unit(1.5) !important;
 
         .paginate_button {
-            padding: 0 .7rem;
+            padding: 0 unit(.4375);
             border-radius: 50%;
             font-size: unit(2);
             color: #333;
@@ -214,7 +214,7 @@ table.data-table.dataTable {
             margin-left: unit(.25);
             transform: scaleX(.75);
             display: inline-block;
-            text-indent: 8px;
+            text-indent: unit(.5);
 
             &.disabled {
                 color: #ccc;
