@@ -850,7 +850,7 @@ function BuildFieldWrapper(element) {
     }
 
     let field = Field(element);    
-    field.value = field.value;
+    if (field.value && field.value != '') field.value = field.value;
     return field;
 }
 

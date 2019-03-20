@@ -1,93 +1,93 @@
-.column {
+.flex-column {
     display: flex;
     flex-direction: column;
 
-    &.left {
+    &.flex-left {
         align-items: flex-start;
     }
 
-    &.right {
+    &.flex-right {
         align-items: flex-start;
     }
     
-    &.bottom {
+    &.flex-bottom {
         justify-content: flex-start;
     }
 }
   
-.row {
+.flex-row {
     display: flex;
     flex-direction: row;
 
-    &.bottom {
+    &.flex-bottom {
         align-items: flex-end;
     }
 
-    &.justify-center {
+    &.flex-justify-center {
         justify-content: center;
     }
 }
 
-.row, .column {
-    .fill {
+.flex-row, .flex-column {
+    .flex-fill {
         flex-basis: 100%;
     }
 }
 
   
 @media #{$desktop} {
-    .desktop-column {
+    .desktop-flex-column {
         display: flex;
         flex-direction: column !important;
     }
 
-    .desktop-row {
+    .desktop-flex-row {
         display: flex;
         flex-direction: row !important;
     }
     
-    .desktop-row, .desktop-column {
-        .desktop-fill {
+    .desktop-flex-row, .desktop-flex-column {
+        .desktop-flex-fill {
             flex-basis: 100%;
         }
     }
 }
 
 @media #{$tablet} {
-    .tablet-column {
+    .tablet-flex-column {
         display: flex;
         flex-direction: column !important;
     }
 
-    .tablet-row {
+    .tablet-flex-row {
         display: flex;
         flex-direction: row !important;
     } 
 
-    .tablet-row, .tablet-column {
-        .tablet-fill {
+    .tablet-flex-row, .tablet-column {
+        .tablet-flex-fill {
             flex-basis: 100%;
         }
     }
 }
 
 @media #{$phone} {
-    .phone-column {
+    .phone-flex-column {
         display: flex;
         flex-direction: column !important;
 
-        &.phone-start {
+        &.phone-flex-start {
             align-items: flex-start !important;
         }
     }
 
-    .phone-row {
+    .phone-flex-row {
         display: flex;
         flex-direction: row !important;
     }
 
-    .phone-row, .phone-column {
-        .phone-fill {
+    .phone-flex-row, .phone-flex-column {
+        .phone-flex-fill {
             flex-basis: 100%;
         }
     }

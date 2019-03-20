@@ -2,10 +2,10 @@
     position: fixed;
     bottom: unit(.25);
     right: 0;
-    min-width: unit(1.875);
-    max-width: unit(3.125);
+    min-width: unit(15.625);
+    max-width: unit(25);
     padding: unit(.5) unit(1);
-    z-index: 1;
+    z-index: 3;
     overflow: hidden;
     display: flex;
     flex-direction: column;

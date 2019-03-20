@@ -95,7 +95,7 @@ ol.list {
         counter-increment: item;
 
         &:before {
-            margin-right: 10px;
+            margin-right: unit(.625);
             content: counter(item);
             border-radius: 100%;
             width: 1.2em;

@@ -12,6 +12,7 @@ module.exports = {
     output: {
         filename: '[name].min.js',
         path: path.join(__dirname, 'dist/'),
+        //path: path.join(__dirname, 'C:/Users/kgalvin/source/repos/YearEndCollection/YearEndCollection/Scripts/'),
         publicPath: 'dist/',
         libraryTarget: 'var',
         // `library` determines the name of the global variable

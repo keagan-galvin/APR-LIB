@@ -33,6 +33,7 @@ select {
         display: block;
         width: 100%;
         min-height: $input-height + $input-top;
+        margin-bottom: 0;
     }
 
     &.unlabeled {
@@ -149,7 +150,7 @@ select {
         height: $input-height;
     }
     select {
-        height: $input-height + .1;
+        height: $input-height;
     }
 
     input:focus,
@@ -360,7 +361,9 @@ select {
     }
 
     .form-input {
-        margin-right: unit(1.5);
+
+        
+
         flex-basis: 100%;
 
         &:last-child {

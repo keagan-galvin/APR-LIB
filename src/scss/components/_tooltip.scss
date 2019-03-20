@@ -69,12 +69,11 @@
         &:before {
             bottom: 100%;
             left: 50%;
-            //margin-bottom: 5px;
             transform: translateX(-50%);
         }
       
       &:hover:before, &:hover:after {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateX(-50%) translateY(unit(-.3125));
       }
     }
       
@@ -84,7 +83,6 @@
         &:before {
             top: 50%;
             left: 100%;
-            //margin-left: 5px;
             transform: translateY(-50%);
         }
       
@@ -99,12 +97,11 @@
         &:before {
             top: 100%;
             left: 50%;
-            //margin-top: 5px;
             transform: translateX(-50%);
         }
       
       &:hover:before, &:hover:after {
-        transform: translateX(-50%) translateY(5px);
+        transform: translateX(-50%) translateY(unit(.3125));
       }
     
     }
@@ -114,7 +111,6 @@
         &:before {
             top: 50%;
             right: 100%;
-            //margin-right: 5px;
             transform: translateY(-50%);
         }
       

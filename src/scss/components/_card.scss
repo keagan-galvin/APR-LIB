@@ -20,7 +20,7 @@
         }
 
         & + .card-content  {
-            border-top: 1px solid $border-color;
+            border-top: unit(.0625) solid $border-color;
         }
     }
 

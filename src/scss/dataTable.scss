@@ -85,7 +85,7 @@ table.data-table.dataTable {
         td, th {
             border-bottom: unit(.0625) solid $border-color;
             padding-left: unit(1.5);
-            padding-right: 42px;
+            padding-right: unit(26.25);
 
             &:first-of-type {
                 padding-left: unit(1.5);
