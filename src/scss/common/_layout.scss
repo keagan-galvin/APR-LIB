@@ -4,15 +4,39 @@
     box-sizing: border-box;
 }
 
+.rounded {
+    border-radius: $border-radius;
+}
+
 .divider {
-    border-bottom: .1rem solid $border-color !important;
+    $solid-border: .1rem solid $border-color !important;
+    $dashed-border: .2rem dashed $border-color !important;
+    $dotted-border: .2rem dotted $border-color !important;
+
+    border-bottom: $solid-border;
+
+    &.vertical {
+        &, &.dashed, &.dotted {
+            border-bottom: 0 none !important;
+        }
+
+        border-left: $solid-border;
+
+        &.dashed {
+            border-left: $dashed-border
+        }
+    
+        &.dotted {
+            border-left: $dotted-border;
+        }
+    }
 
     &.dashed {
-        border-bottom: .2rem dashed $border-color !important;
+        border-bottom: $dashed-border;
     }
 
     &.dotted {
-        border-bottom: .2rem dotted $border-color !important;
+        border-bottom: $dotted-border;
     }
 }
 
@@ -28,8 +52,88 @@
     margin: 0 !important;
 }
 
+.content-margin {
+    margin: unit(2);
+}
+
+.content-margin-x {
+    margin-left: unit(2);
+    margin-right: unit(2);
+}
+
+.content-margin-y {
+    margin-top: unit(2);
+    margin-bottom: unit(2);
+}
+
+.content-margin-top {
+    margin-top: unit(2);
+}
+
+.content-margin-bottom {
+    margin-bottom: unit(2);
+}
+
+.content-margin-left {
+    margin-left: unit(2);
+}
+
+.content-margin-right {
+    margin-right: unit(2);
+}
+
 .content-padding {
-    padding: unit(1) unit(1.5);  
+    padding: unit(2);  
+}
+
+.content-padding-x {
+    padding-left: unit(2);
+    padding-right: unit(2);
+}
+
+.content-padding-y {
+    padding-top: unit(2);
+    padding-bottom: unit(2);
+}
+
+.content-padding-top {
+    padding-top: unit(2);
+}
+
+.content-padding-bottom {
+    padding-bottom: unit(2);
+}
+
+.content-padding-left {
+    padding-left: unit(2);
+}
+
+.content-padding-right {
+    padding-right: unit(2);
+}
+
+.section {
+
+    &.info {
+        color: $info-color;
+        background: $info-background;
+    }
+
+    &.success {
+        color: $success-color;
+        background: $success-background;
+    }
+
+    &.warn {
+        color: $warn-color;
+        background: $warn-background;
+    }
+
+    &.secondary {
+        color: $dark-gray;
+        background: $hover-color;
+    }
+
 }
 
 .animate {

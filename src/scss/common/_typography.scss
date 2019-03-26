@@ -23,11 +23,13 @@ h4, .h4 {
 }
 
 h5, .h5 {
+    font-size: unit(1.2);
     font-weight: 700;
     line-height: $golden-rule;
 }
 
 h6, .h6 {
+    font-size: unit(1);
     font-weight: 700;
     line-height: $golden-rule;
 }
@@ -52,10 +54,17 @@ a {
     }
 }
 
-
+.secondary {
+    font-size: unit(.9);
+    color: $gray;
+}
 
 h1,
+h2,
 h3,
+h4,
+h5,
+h6,
 p,
 span,
 div,
@@ -75,6 +84,14 @@ strong {
 
     &.success {
         color: $success-color;
+    }
+
+    &.gray {
+        color: $gray;
+    }
+
+    &.info {
+        color:$info-color;
     }
 
     &.strong {

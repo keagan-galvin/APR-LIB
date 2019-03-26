@@ -41,6 +41,7 @@ function HandleFieldEvent(e) {
         if (e.key && e.key == 'Escape') target.blur();
 
     }
+
 }
 
 /**
@@ -51,7 +52,7 @@ function HandleFieldEvent(e) {
  * @param {function} callback Function to be called when the form is submitted.
  * @returns {{ field:function, fields:Field[], callback:function, data:Object, validate:function, isValid:boolean, isLocked:boolean, isLoading:boolean, element:element, wrapper:element, errors: {fieldName:string, errors:string[]}[], progressBar: { element:element, isLoading:boolean },  errorPanel: { element:element, text:string }, messagePanel: { element:element, text:string }, }}
  */
-export function Form(target, callback) {
+export function Form(target, callback, ) {
     const form = {};
     let isValid, isLocked, isLoading;
 
@@ -145,6 +146,30 @@ export function Form(target, callback) {
         Object.defineProperty(form, 'fields', {
             get() {
                 return getFields();
+            }
+        });
+
+        /**
+         * @memberof FormHelpers.Form 
+         * @type {Function}
+         * @property {string} name Form Collection's Name
+         * @property {id} name Form Collection's Id
+         * @description Get a Field by field name
+         * @returns {Object} [Form](#formhelpersform)
+         * @instance
+         */
+        form.collection = getCollection;
+
+        /**
+         * @memberof FormHelpers.Form 
+         * @name collections
+         * @type {Object[]} [[Form](#formhelpersform)]
+         * @description Gets an array of the target form's collections
+         * @instance
+         */
+        Object.defineProperty(form, 'collections', {
+            get() {
+                return getCollections();
             }
         });
 
@@ -270,8 +295,18 @@ export function Form(target, callback) {
             const fields = form.fields;
 
             for (let prop in data) {
-                props.push(prop);
-                if (fields.some(x => x.name == prop)) {
+                if (Array.isArray(data[prop])) {
+                    let collections = form.collections.filter(x => x.name == prop);
+                    for (let i = 0; i < data[prop].length; i++) {
+                        var collectionData = data[prop][i];
+                        for(let ii = 0; ii < collections.length; ii++) {
+                            if (collectionData[collections[ii].idParam] == collections[ii].id) {
+                                collections[ii].setValues(collectionData);
+                            }
+                        }
+                    }
+                } else if (fields.some(x => x.name == prop)) {
+                    props.push(prop);
                     fields.find(x => x.name == prop).value = data[prop];
                 }
             }
@@ -286,8 +321,20 @@ export function Form(target, callback) {
             const fields = form.fields;
 
             for (let prop in data) {
-                props.push(prop);
-                if (fields.some(x => x.name == prop)) fields.find(x => x.name == prop).value = data[prop];
+                if (Array.isArray(data[prop])) {
+                    let collections = form.collections.filter(x => x.name == prop);
+                    for (let i = 0; i < data[prop].length; i++) {
+                        var collectionData = data[prop][i];
+                        for(let ii = 0; ii < collections.length; ii++) {
+                            if (collectionData[collections[ii].idParam] == collections[ii].id) {
+                                collections[ii].updateValues(collectionData);
+                            }
+                        }
+                    }
+                } else if (fields.some(x => x.name == prop)) {                    
+                    props.push(prop);
+                    fields.find(x => x.name == prop).value = data[prop];
+                }
             }
         };
     }
@@ -307,6 +354,29 @@ export function Form(target, callback) {
                 return element;
             }
         });
+
+        if (target.hasAttribute('form-collection')) {
+            element = target;
+
+            Object.defineProperty(form, 'name', {
+                get: function () {
+                    return element.getAttribute('form-collection');
+                }
+            });
+
+            Object.defineProperty(form, 'id', {
+                get: function () {
+                    return element.getAttribute('form-collectionId');
+                }
+            });
+
+            Object.defineProperty(form, 'idParam', {
+                get: function () {
+                    return element.getAttribute('form-collectionId-param');
+                }
+            });
+            return;
+        }
 
         if (target.nodeName == "FORM") {
             element = target;
@@ -452,20 +522,68 @@ export function Form(target, callback) {
         }
     }
 
+    function getFormFields() {
+        let fields = Array.from(form.element.querySelectorAll(FieldTags.join(", ")));
+
+        // Remove collection fields
+        var formFields = [];
+        for(let i = 0; i < fields.length; i++) {
+            let collectionWrapper = CommonHelpers.seekElementInBranch(fields[i], 'hasAttribute', 'form-collection');
+            if (!collectionWrapper || collectionWrapper == form.element) formFields.push(fields[i]);
+        }
+
+        return formFields;
+    }
+
     function getData() {
         const data = {};
-        const fields = Array.from(form.element.querySelectorAll(FieldTags.join(", ")));
-        fields.forEach(field => {
+        
+        getFormFields().forEach(field => {
             let name = field.name;
             if (name) data[name] = GetValue(field);
         });
+                    
+        const collections = Array.from(form.element.querySelectorAll('[form-collection]'));
+
+        for(let i = 0; i < collections.length; i++) {            
+            // Get Collection Name
+            let collectionName = collections[i].getAttribute('form-collection');
+            if (!collectionName || collectionName == '') return;
+
+            // Initialize Collection
+            if (!data[collectionName]) data[collectionName] = [];
+            let collection = {};
+
+            let collectionId = collections[i].getAttribute('form-collectionId');
+            
+            let collectionIndex = -1;
+            if (collectionId && collectionId != '') {
+                let collectionIdParam = collections[i].getAttribute('form-collectionId-param');
+                if (!collectionIdParam || collectionIdParam == '') collectionIdParam = 'collectionId'; 
+                
+                collectionIndex = data[collectionName].findIndex(x => x[collectionIdParam] == collectionId);
+                if (collectionIndex < -1) collection = data[collectionName][collectionIndex];
+                else collection[collectionIdParam] = collectionId;
+            }
+                       
+            let fields = Array.from(collections[i].querySelectorAll(FieldTags.join(", ")));
+
+            fields.forEach(field => {
+                let name = field.name;
+                if (name) collection[name] = GetValue(field);
+            });
+
+            if (collectionIndex < -1) data[collectionName][collectionIndex] = collection;
+            else {
+                data[collectionName].push(collection);
+            }
+        }
 
         return data;
     }
 
     function getFields() {
-        const fields = Array.from(form.element.querySelectorAll(FieldTags.join(", ")));
-        return fields.map(x => Field(x));
+        return getFormFields().map(x => Field(x));
     }
 
     function getField(name) {
@@ -474,6 +592,17 @@ export function Form(target, callback) {
             field = form.element.querySelector(`${FieldTags[i]}[name="${name}"]`);
             if (field) return Field(field);
         }
+    }
+
+    function getCollections() {
+        const collections = Array.from(form.element.querySelectorAll('[form-collection]'));
+        return collections.map(x => Form(x));
+    }
+
+    function getCollection(name, id = null) {
+        let collection = form.element.querySelector(`[form-collection="${name}"]${id ? `[form-collectionId="${id}"]` : ''}`);
+        if (collection) collection = Form(collection);
+        return collection;
     }
 }
 

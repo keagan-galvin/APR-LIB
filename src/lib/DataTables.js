@@ -35,7 +35,7 @@ export function DataTableCard(card, config) {
             if (!_progressBar) {
                 _progressBar = ProgressBar();
                 _toolbar.insertAdjacentElement('beforeend', _progressBar.element);
-            } else _progressBar = ProgressBar(_progressBar);
+            } else _progressBar = ProgressBar({ target: _progressBar });
         }
 
         _dataTable = DataTable(_tableElement, config);

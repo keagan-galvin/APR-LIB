@@ -77,7 +77,7 @@ $border-radius: unit(.25);
 }
 
 @mixin maxBoxShadow() {
-    box-shadow: 0 unit(3.125) unit(3.125) unit(-.1875) rgba(0, 0, 0, .2),
+    box-shadow: 0 unit(1.125) unit(3.125) unit(-.1875) rgba(0, 0, 0, .2),
         0 unit(.5) unit(.625) unit(.0625) rgba(0, 0, 0, .14),
         0 unit(.1875) unit(.875) unit(0.125) rgba(0, 0, 0, .12);
 }

@@ -1,8 +1,23 @@
+@import './common/_vars';
+
 @import '../plugins/DataTables/css/dataTables.bootstrap.min.scss';
 @import '../plugins/DataTables/css/buttons.bootstrap.min.scss';
 @import '../plugins/DataTables/css/bootstrap-glyphicons.scss';
 
-@import './common/_vars';
+.dataTables_wrapper {
+    .dataTables_length, .dataTables_info, .dataTables_paginate{
+        &, & label {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+        }
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+    
+}
 
 table.data-table.dataTable {
     width: 100% !important;
@@ -84,11 +99,11 @@ table.data-table.dataTable {
 
         td, th {
             border-bottom: unit(.0625) solid $border-color;
-            padding-left: unit(1.5);
-            padding-right: unit(26.25);
+            padding-left: unit(2);
+            padding-right: unit(2.625);
 
             &:first-of-type {
-                padding-left: unit(1.5);
+                padding-left: unit(2);
             }
 
             &:last-of-type {
@@ -105,10 +120,10 @@ table.data-table.dataTable {
     .sorting, .sorting_desc, .sorting_asc {
         padding-right: unit(1) + 2.3rem !important;
 
-        &:after {
-            bottom: unit(.875) !important;
-            right: unit(1.125) !important;
-        }
+        // &:after {
+        //     bottom: unit(.875) !important;
+        //     right: unit(1.125) !important;
+        // }
     }
 
     .sorting_desc, .sorting_asc {
@@ -132,7 +147,6 @@ table.data-table.dataTable {
         display: block;
         position: relative;
         &:hover {
-            text-decoration: none;
             .hover-hide {
                 margin-left: unit(.5);
                 top: unit(.0625);
@@ -186,13 +200,13 @@ table.data-table.dataTable {
     }
 
     .dataTables_length, .dataTables_paginate, .dataTables_info {
-        padding: unit(1) unit(1.5) !important;
+        padding: unit(1) unit(2) !important;
         font-size: unit(.9);
         color: #777;
     }
 
     .dataTables_length {
-        padding: unit(.6875) unit(1.5) !important;
+        padding: unit(.6875) unit(2) !important;
 
         select {
             width: auto !important;
@@ -203,7 +217,7 @@ table.data-table.dataTable {
     }
 
     .dataTables_paginate {
-        padding: unit(.4375) unit(1.5) !important;
+        padding: unit(.4375) unit(2) !important;
 
         .paginate_button {
             padding: 0 unit(.4375);
@@ -226,6 +240,8 @@ table.data-table.dataTable {
     .dataTables_empty {
         vertical-align: middle;
         color: $gray;
+        text-align: center;
+        padding: unit(2);
     }
 
     .dataTables_filter {

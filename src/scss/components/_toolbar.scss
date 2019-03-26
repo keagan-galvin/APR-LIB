@@ -1,7 +1,7 @@
 .toolbar {
     position: relative;
     display: flex;
-    padding: unit(1) unit(1.5);
+    padding: unit(1.25) unit(2);
     align-items: center;
 
     .progress {
@@ -21,16 +21,16 @@
         display: flex;
         color: $dark-gray;
 
-        .group {
+        .group, .dt-buttons {
             display: flex;
             align-items: center;
-            padding: 0 unit(.5);
+            padding: 0 unit(1);
 
             &:last-child {
                 padding-right: 0;
             }
 
-            & + .group {
+            & + .group, & + .dt-buttons {
                 border-left: unit(.0625) solid $border-color;
             }
             
@@ -46,6 +46,7 @@
         label {
             font-weight: 500;
             white-space: nowrap;
+            margin-bottom: 0;
         }
 
         select {

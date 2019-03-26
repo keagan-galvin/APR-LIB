@@ -104,7 +104,7 @@ select {
         margin-top: unit(.25);
         left: 0;
         right: 0;
-        bottom: unit(-1.5);
+        top: unit(2.7);
         position: absolute;
         transition: transform 130ms ease-in-out, opacity 130ms ease-in-out;
         opacity: 1;
@@ -350,6 +350,7 @@ select {
 .form-group {
     display: flex;
     align-items: baseline;
+    margin-bottom: 0;
 
     &.row {
         flex-direction: row;
@@ -360,10 +361,11 @@ select {
         flex-direction: column;
     }
 
+    .spacer {
+        padding: unit(1);
+    }
+
     .form-input {
-
-        
-
         flex-basis: 100%;
 
         &:last-child {

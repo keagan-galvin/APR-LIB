@@ -4,6 +4,7 @@
     height: unit(.25);
     background-color: #e5e5e5;
     overflow: hidden;
+    border-radius: 0 !important;
 
     & .determinate, & .indeterminate {
         background-color: $dark-gray;
