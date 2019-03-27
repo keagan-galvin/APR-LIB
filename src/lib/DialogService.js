@@ -237,6 +237,9 @@ export function Dialog({
     function close(data, immediate = true, timeout = 300) {
         // Clear Current Focus
         let tmp = document.createElement("input");
+        tmp.style.position = 'fixed';
+        tmp.style.top = 0;
+        tmp.style.left = 0;
         document.body.appendChild(tmp);
         tmp.focus();
         document.body.removeChild(tmp);

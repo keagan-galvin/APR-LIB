@@ -17,6 +17,10 @@
         padding: 0;
     }
 
+    .spacer {
+        padding: unit(.5);
+    }
+
     .options {
         display: flex;
         color: $dark-gray;
@@ -30,15 +34,19 @@
                 padding-right: 0;
             }
 
+            &:first-child {
+                padding-left: 0;
+            }
+
             & + .group, & + .dt-buttons {
                 border-left: unit(.0625) solid $border-color;
             }
             
             button, .button {
-                margin-right: unit(.5);
+                margin-left: unit(.5);
 
-                &:last-child {
-                    margin-right: 0;
+                &:first-child {
+                    margin-left: 0;
                 }
             }
         }
