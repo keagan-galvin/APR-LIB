@@ -90,6 +90,12 @@ strong {
         color: $gray;
     }
 
+    &.disabled {
+         a, & {
+            color: $light-gray !important;
+         }
+    }
+
     &.info {
         color:$info-color;
     }

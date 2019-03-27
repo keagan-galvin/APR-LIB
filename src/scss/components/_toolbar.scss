@@ -34,7 +34,7 @@
                 border-left: unit(.0625) solid $border-color;
             }
             
-            button {
+            button, .button {
                 margin-right: unit(.5);
 
                 &:last-child {

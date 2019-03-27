@@ -1,4 +1,8 @@
 import {
+    brotliDecompressSync
+} from "zlib";
+
+import {
     isElement
 } from "./CommonHelpers";
 import {
@@ -36,7 +40,7 @@ function HandleFieldEvent(e) {
                 field.wrapper.classList.add("touched");
             }
         }
-        
+
         //Clear focus
         if (e.key && e.key == 'Escape') target.blur();
 
@@ -77,8 +81,9 @@ export function Form(target, callback, ) {
 
         form.element.addEventListener('submit', (e) => {
             e.preventDefault();
-            callback(form.validate(), form.data);
+            form.submit();
         });
+
     }
 
     function defineSimpleProperties() {
@@ -191,6 +196,8 @@ export function Form(target, callback, ) {
         });
 
 
+
+
         /**
          * @memberof FormHelpers.Form
          * @name isLocked
@@ -205,8 +212,9 @@ export function Form(target, callback, ) {
             set(locked = true) {
                 if (typeof locked != 'boolean') throw "Invalid value";
                 isLocked = locked;
-                form.fields.forEach(field => field.isLocked = isLocked);
                 Array.from(form.wrapper.querySelectorAll('button')).forEach(button => button.disabled = isLocked);
+                form.fields.forEach(field => field.isLocked = isLocked);
+                form.collections.forEach(collection => collection.isLocked = isLocked);
             }
         });
 
@@ -229,6 +237,15 @@ export function Form(target, callback, ) {
             }
         });
 
+        /**
+         * @memberof FormHelpers.Form
+         * @type {function}
+         * @description Executes  callback function.
+         * @instance
+         */
+        form.submit = () => {
+            callback(form.validate(), form.data);
+        };
 
         /**
          * @memberof FormHelpers.Form  
@@ -243,7 +260,31 @@ export function Form(target, callback, ) {
             form.fields.forEach(field => {
                 if (!field.validate()) isValid = false;
             });
+
+            form.collections.forEach(collection => {
+                if (!collection.validate()) isValid = false;
+            });
             return isValid;
+        };
+
+        /**
+         * @memberof FormHelpers.Form  
+         * @name scrollToFirstError()
+         * @type {function}
+         * @description Validates the form and sets/clears the error messages, and returns a boolean.
+         * @instance
+         * @returns {boolean}
+         */
+        form.scrollToFirstError = (options = {
+            behavior: "smooth",
+            block: "center",
+            inline: "center"
+        }) => {
+            let errorWrapper = form.element.querySelector('.form-input.error');
+            if (errorWrapper) {
+                let errorField = errorWrapper.querySelector(FieldTags.join(','));
+                if (errorField) errorField.scrollIntoView(options);
+            }
         };
 
         /**
@@ -299,7 +340,7 @@ export function Form(target, callback, ) {
                     let collections = form.collections.filter(x => x.name == prop);
                     for (let i = 0; i < data[prop].length; i++) {
                         var collectionData = data[prop][i];
-                        for(let ii = 0; ii < collections.length; ii++) {
+                        for (let ii = 0; ii < collections.length; ii++) {
                             if (collectionData[collections[ii].idParam] == collections[ii].id) {
                                 collections[ii].setValues(collectionData);
                             }
@@ -325,13 +366,13 @@ export function Form(target, callback, ) {
                     let collections = form.collections.filter(x => x.name == prop);
                     for (let i = 0; i < data[prop].length; i++) {
                         var collectionData = data[prop][i];
-                        for(let ii = 0; ii < collections.length; ii++) {
+                        for (let ii = 0; ii < collections.length; ii++) {
                             if (collectionData[collections[ii].idParam] == collections[ii].id) {
                                 collections[ii].updateValues(collectionData);
                             }
                         }
                     }
-                } else if (fields.some(x => x.name == prop)) {                    
+                } else if (fields.some(x => x.name == prop)) {
                     props.push(prop);
                     fields.find(x => x.name == prop).value = data[prop];
                 }
@@ -527,7 +568,7 @@ export function Form(target, callback, ) {
 
         // Remove collection fields
         var formFields = [];
-        for(let i = 0; i < fields.length; i++) {
+        for (let i = 0; i < fields.length; i++) {
             let collectionWrapper = CommonHelpers.seekElementInBranch(fields[i], 'hasAttribute', 'form-collection');
             if (!collectionWrapper || collectionWrapper == form.element) formFields.push(fields[i]);
         }
@@ -537,15 +578,15 @@ export function Form(target, callback, ) {
 
     function getData() {
         const data = {};
-        
+
         getFormFields().forEach(field => {
             let name = field.name;
             if (name) data[name] = GetValue(field);
         });
-                    
+
         const collections = Array.from(form.element.querySelectorAll('[form-collection]'));
 
-        for(let i = 0; i < collections.length; i++) {            
+        for (let i = 0; i < collections.length; i++) {
             // Get Collection Name
             let collectionName = collections[i].getAttribute('form-collection');
             if (!collectionName || collectionName == '') return;
@@ -555,17 +596,17 @@ export function Form(target, callback, ) {
             let collection = {};
 
             let collectionId = collections[i].getAttribute('form-collectionId');
-            
+
             let collectionIndex = -1;
             if (collectionId && collectionId != '') {
                 let collectionIdParam = collections[i].getAttribute('form-collectionId-param');
-                if (!collectionIdParam || collectionIdParam == '') collectionIdParam = 'collectionId'; 
-                
+                if (!collectionIdParam || collectionIdParam == '') collectionIdParam = 'collectionId';
+
                 collectionIndex = data[collectionName].findIndex(x => x[collectionIdParam] == collectionId);
                 if (collectionIndex < -1) collection = data[collectionName][collectionIndex];
                 else collection[collectionIdParam] = collectionId;
             }
-                       
+
             let fields = Array.from(collections[i].querySelectorAll(FieldTags.join(", ")));
 
             fields.forEach(field => {
@@ -719,12 +760,11 @@ export function Field(target) {
          */
         Object.defineProperty(field, 'isHidden', {
             get() {
-                return isHidden;
+                return FieldIsHidden(field);
             },
             set(hidden = true) {
                 if (typeof hidden != 'boolean') throw "Invalid value";
-                isHidden = hidden;
-                HideField(field, isHidden);
+                HideField(field, hidden);
             }
         });
 
@@ -778,15 +818,16 @@ export function Field(target) {
                     let noteEl = field.note.element;
                     if (text && text != "") {
                         errorEl.innerHTML = text;
+                        if (field.wrapper && !field.wrapper.classList.contains('error')) field.wrapper.classList.add('error');
                         if (errorEl.classList.contains('hidden')) errorEl.classList.remove('hidden');
                         if (noteEl && !noteEl.classList.contains('hidden')) noteEl.classList.add('hidden');
                     } else {
-                        errorEl.innerHTML = '';                        
+                        errorEl.innerHTML = '';
+                        if (field.wrapper && field.wrapper.classList.contains('error')) field.wrapper.classList.remove('error');
                         if (!errorEl.classList.contains('hidden')) errorEl.classList.add('hidden');
                         if (noteEl && noteEl.classList.contains('hidden')) noteEl.classList.remove('hidden');
                     }
                 }
-
             }
         });
 
@@ -852,6 +893,29 @@ export function Field(target) {
 
         /**
          * @memberof FormHelpers.Field  
+         * @name required
+         * @type {boolean}
+         * @description Gets/Sets the required state.
+         * @instance
+         */
+        Object.defineProperty(field, 'required', {
+            get() {
+                return field.element.required;
+            },
+            set(required) {
+                if (typeof required != 'boolean') throw 'Invalid boolean.';
+                field.element.required = required;
+                if (field.placeholder && field.placeholder.text) {
+                    let placeholder = field.placeholder.text;
+                    const hasRequiredFlag = placeholder[placeholder.length - 1] == '*';
+                    if (required && !hasRequiredFlag) field.placeholder.text = placeholder + '*';
+                    if (!required && hasRequiredFlag) field.placeholder.text = placeholder.slice(0, -1);
+                }
+            }
+        });
+
+        /**
+         * @memberof FormHelpers.Field  
          * @name validate()
          * @type {function}
          * @description Validates the field and sets/clears the error message, and returns a boolean.
@@ -903,7 +967,7 @@ export function Field(target) {
                         field.element.appendChild(o);
                     });
 
-                    if (options.length > 0)  field.value = field.element[options.some(x => x.selected) ? field.element.selectedIndex : 0].value;
+                    if (options.length > 0) field.value = field.element[options.some(x => x.selected) ? field.element.selectedIndex : 0].value;
                 }
             });
         }
@@ -978,7 +1042,7 @@ function BuildFieldWrapper(element) {
             }
     }
 
-    let field = Field(element);    
+    let field = Field(element);
     if (field.value && field.value != '') field.value = field.value;
     return field;
 }
@@ -996,12 +1060,19 @@ function ValidateField(field) {
         const fields = Array.from(groupWrapper.querySelectorAll(FieldTags.join(','))).map(x => {
             return Field(x);
         });
+
+
         fields.forEach(f => {
             const error = getError(f.element);
-            if (error) errors.push({
-                field: f,
-                error: error
-            });
+            if (!field.wrapper)
+                if (error) {
+                    errors.push({
+                        field: f,
+                        error: error
+                    });
+
+                    if (f.wrapper) f.wrapper.classList.add('error');
+                } else if (f.wrapper) f.wrapper.classList.remove('error');
         });
 
         if (fields.length > 0) {
@@ -1125,6 +1196,12 @@ function HideField(field, isHidden = true) {
     const wrapper = field.wrapper;
     if (wrapper) wrapper.style.display = (isHidden) ? 'none' : '';
     else field.element.style.display = (isHidden) ? 'none' : '';
+}
+
+function FieldIsHidden(field) {
+    const wrapper = field.wrapper;
+    if (wrapper) return wrapper.style.display == 'none';
+    else return field.element.style.display == 'none';
 }
 
 function GetFieldWrapper(target) {
