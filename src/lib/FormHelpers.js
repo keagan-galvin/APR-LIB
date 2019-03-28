@@ -1,8 +1,4 @@
 import {
-    brotliDecompressSync
-} from "zlib";
-
-import {
     isElement
 } from "./CommonHelpers";
 import {

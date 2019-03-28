@@ -71,23 +71,23 @@ function Ripple(e) {
         ripple.classList.add("ripple-effect");
         rippleContainer.classList.add("ripple-container");
         rippleContainer.appendChild(ripple);
-        document.body.appendChild(rippleContainer);
+        target.appendChild(rippleContainer);
 
         ripple.style.marginLeft = dx + "px";
         ripple.style.marginTop = dy + "px";
-        rippleContainer.style.zIndex = findHighestZIndex() + 1;
+        rippleContainer.style.zIndex = style.zIndex + 1;
 
-        rippleContainer.style.left = left + (((window.pageXOffset || document.scrollLeft) - (document.clientLeft || 0)) || 0) + "px";
-        rippleContainer.style.top = top + (((window.pageYOffset || document.scrollTop) - (document.clientTop || 0)) || 0) + "px";
+        //rippleContainer.style.left = left + (((window.pageXOffset || document.scrollLeft) - (document.clientLeft || 0)) || 0) + "px";
+        //rippleContainer.style.top = top + (((window.pageYOffset || document.scrollTop) - (document.clientTop || 0)) || 0) + "px";
         rippleContainer.style.width = width + "px";
         rippleContainer.style.height = height + "px";
+
         rippleContainer.style.borderTopLeftRadius = style.borderTopLeftRadius;
         rippleContainer.style.borderTopRightRadius = style.borderTopRightRadius;
         rippleContainer.style.borderBottomLeftRadius = style.borderBottomLeftRadius;
         rippleContainer.style.borderBottomRightRadius = style.borderBottomRightRadius;
 
         setTimeout(() => {
-
             ripple.style.width = radius * 2 + "px";
             ripple.style.height = radius * 2 + "px";
             ripple.style.marginLeft = dx - radius + "px";

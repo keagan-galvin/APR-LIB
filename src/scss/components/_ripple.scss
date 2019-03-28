@@ -1,6 +1,8 @@
 
 .ripple {
     cursor: pointer;
+    overflow: hidden;
+    position: relative;
 }
 
 .ripple-container {

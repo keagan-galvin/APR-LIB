@@ -47,7 +47,7 @@
         transform: translateY(unit(6.25)) scale(.9);
         opacity: 0;
         transition: transform 230ms ease-in, opacity 230ms ease-in;
-        transition-delay: 500ms;
+        transition-delay: 150ms;
 
         .card-toolbar  + .card-content {
             border-top: 0 none;
@@ -58,10 +58,6 @@
             transform: none;
             transition: all 230ms ease-out;
             transition-delay: none;
-        }
-
-        &.immediate {
-            transition-delay: 0ms !important;
         }
 
         .actions {
